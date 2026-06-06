@@ -2,11 +2,23 @@
 
 一个面向 Codex 的 PPT 生成 skill。它基于 `ningzimu/codex-ppt-skill` 的图片式 PPT 生产流程，并加入了更适合中文项目展示和资料调研的本地增强：
 
+![Codex PPT Skill 效果预览](assets/showcase/overview.png)
+
 - 一句话主题识别：例如“生成某某画展 PPT”，会先判断这是主题/展览/活动型任务，而不是本地项目。
 - 联网资料调研：对画展、人物、品牌、地点、活动、公司、新闻、趋势等公开主题，先搜索官方和可靠来源，再生成大纲和 PPT。
 - 项目证据扫描：对代码项目，读取 README、配置、源码、截图、输出结果和可能的运行命令，先生成证据清单，再写项目汇报。
 - 无文字背景图：可以用 image2/imagegen 生成没有文字的背景图，再把文字放到 HTML 或 PPT 独立文字层，方便后期自己修改。
 - 图片式 PPT 流程：先确认大纲、风格、图片后端和样张，再生成整套幻灯片图片并组装成 PPTX。
+
+## 效果展示
+
+| 主题/画展调研 | 项目证据汇报 |
+| --- | --- |
+| ![主题/画展调研模式](assets/showcase/topic-exhibition-preview.png) | ![项目证据汇报模式](assets/showcase/project-report-preview.png) |
+
+| 无文字背景 + 可编辑文字层 | 稳定生成流程 |
+| --- | --- |
+| ![无文字背景模式](assets/showcase/textless-background-preview.png) | ![稳定生成流程](assets/showcase/workflow-preview.png) |
 
 ## 适合什么场景
 
