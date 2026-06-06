@@ -2,7 +2,7 @@
 
 A Codex skill for creating visually unified PPT/PPTX decks. It is based on `ningzimu/codex-ppt-skill` and adds local enhancements for Chinese project reports, web-researched topic decks, textless generated backgrounds, and editable HTML/PPT text layers.
 
-![Codex PPT Skill showcase](assets/showcase/overview.png)
+![Codex PPT Skill showcase](assets/showcase/slides_example.png)
 
 ## Highlights
 
@@ -14,13 +14,15 @@ A Codex skill for creating visually unified PPT/PPTX decks. It is based on `ning
 
 ## Showcase
 
-| Topic / exhibition research | Project evidence report |
-| --- | --- |
-| ![Topic research mode](assets/showcase/topic-exhibition-preview.png) | ![Project report mode](assets/showcase/project-report-preview.png) |
+The following examples use a hand-drawn technical explanation style to show what this skill is designed to produce.
 
-| Textless backgrounds | Stable generation workflow |
-| --- | --- |
-| ![Textless background mode](assets/showcase/textless-background-preview.png) | ![Workflow preview](assets/showcase/workflow-preview.png) |
+| Multi-mode generation | Exhibition research | Project report |
+| --- | --- | --- |
+| ![Multi-mode generation](assets/showcase/slide_01.png) | ![Exhibition research](assets/showcase/slide_03.png) | ![Project report](assets/showcase/slide_04.png) |
+
+| Textless background | Stable workflow | Output structure |
+| --- | --- | --- |
+| ![Textless background](assets/showcase/slide_06.png) | ![Stable workflow](assets/showcase/slide_07.png) | ![Output structure](assets/showcase/slide_10.png) |
 
 ## Install
 
