@@ -14,7 +14,7 @@ A Codex skill for creating visually unified PPT/PPTX decks. It is based on `ning
 
 ## Showcase
 
-The following examples use a hand-drawn technical explanation style to show what this skill is designed to produce.
+The following examples use a premium technology presentation style to show what this skill is designed to produce.
 
 | Multi-mode generation | Exhibition research | Project report |
 | --- | --- | --- |
