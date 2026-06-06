@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex PPT Skill"
+  short_description: "Create PPT decks from topics, web research, or project evidence."
+  default_prompt: "Use $codex-ppt-skill to research this topic or analyze this project, preserve real evidence, generate textless backgrounds when useful, and create a PPT deck."
