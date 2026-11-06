@@ -1,336 +1,189 @@
 {
-  "fontFamily": "Microsoft YaHei",
-  "slideSize": {
-    "width": 1280,
-    "height": 720
-  },
+  "designProfile": "../../references/design-profiles/technical-editorial.json",
   "expectedSlideCount": 2,
   "slides": [
     {
-      "background": "#102D29",
       "requireEditableText": true,
       "elements": [
         {
           "type": "text",
-          "text": "示例：仓储系统",
-          "position": {
-            "left": 64,
-            "top": 48,
-            "width": 1000,
-            "height": 32
-          },
-          "fontSize": 20,
-          "color": "#96B7A9",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          }
+          "text": "01 / 虚构仓储示例",
+          "styleRole": "sectionLabel"
         },
         {
           "type": "text",
           "text": "库存查询与变更通知",
-          "position": {
-            "left": 64,
-            "top": 105,
-            "width": 1100,
-            "height": 68
-          },
-          "fontSize": 48,
-          "color": "#F6F4EB",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          }
+          "styleRole": "title"
         },
         {
           "type": "shape",
           "id": "browser",
-          "geometry": "rect",
+          "styleRole": "node",
           "position": {
             "left": 64,
-            "top": 254,
+            "top": 250,
             "width": 248,
             "height": 170
-          },
-          "fill": "#1D3B35",
-          "lineColor": "#527366",
-          "lineWidth": 1
+          }
         },
         {
           "type": "text",
           "text": "浏览器",
+          "styleRole": "nodeTitle",
           "position": {
             "left": 88,
-            "top": 278,
+            "top": 274,
             "width": 200,
-            "height": 42
-          },
-          "fontSize": 32,
-          "color": "#F6F4EB",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "height": 40
           }
         },
         {
           "type": "text",
           "text": "React 页面\n查询库存与出入库",
+          "styleRole": "nodeBody",
           "position": {
             "left": 88,
-            "top": 336,
-            "width": 215,
-            "height": 68
-          },
-          "fontSize": 23,
-          "color": "#C7D6CD",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 331,
+            "width": 216,
+            "height": 65
           }
         },
         {
           "type": "shape",
           "id": "app",
-          "geometry": "rect",
+          "styleRole": "focus",
           "position": {
             "left": 480,
-            "top": 254,
+            "top": 250,
             "width": 328,
             "height": 170
-          },
-          "fill": "#D5E5D3",
-          "lineColor": "#D5E5D3",
-          "lineWidth": 1
+          }
         },
         {
           "type": "text",
           "text": "Next.js",
+          "styleRole": "nodeTitle",
           "position": {
             "left": 508,
-            "top": 278,
+            "top": 274,
             "width": 275,
-            "height": 42
-          },
-          "fontSize": 34,
-          "color": "#15352B",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "height": 40
           }
         },
         {
           "type": "text",
           "text": "页面渲染 / Server Actions\n校验权限与处理库存事务",
+          "styleRole": "nodeBody",
           "position": {
             "left": 508,
-            "top": 338,
+            "top": 331,
             "width": 280,
-            "height": 70
-          },
-          "fontSize": 22,
-          "color": "#355447",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "height": 65
           }
         },
         {
           "type": "shape",
           "id": "db",
-          "geometry": "rect",
+          "styleRole": "node",
           "position": {
             "left": 978,
-            "top": 254,
+            "top": 250,
             "width": 238,
             "height": 170
-          },
-          "fill": "#1D3B35",
-          "lineColor": "#527366",
-          "lineWidth": 1
+          }
         },
         {
           "type": "text",
           "text": "MySQL",
+          "styleRole": "nodeTitle",
           "position": {
             "left": 1002,
-            "top": 278,
+            "top": 274,
             "width": 190,
-            "height": 42
-          },
-          "fontSize": 34,
-          "color": "#F6F4EB",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "height": 40
           }
         },
         {
           "type": "text",
           "text": "仓库与库存\n库存变更流水",
+          "styleRole": "nodeBody",
           "position": {
             "left": 1002,
-            "top": 338,
+            "top": 331,
             "width": 190,
-            "height": 70
-          },
-          "fontSize": 23,
-          "color": "#C7D6CD",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "height": 65
           }
         },
         {
           "type": "text",
           "text": "HTTP 请求",
+          "styleRole": "relation",
           "position": {
             "left": 328,
             "top": 278,
-            "width": 140,
-            "height": 34
-          },
-          "fontSize": 21,
-          "color": "#D0DCCF",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "width": 143,
+            "height": 30
           }
         },
         {
           "type": "text",
           "text": "SQL / 事务",
+          "styleRole": "relation",
           "position": {
             "left": 824,
             "top": 278,
             "width": 145,
-            "height": 34
-          },
-          "fontSize": 21,
-          "color": "#D0DCCF",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "height": 30
           }
         },
         {
           "type": "shape",
           "id": "socket",
-          "geometry": "rect",
+          "styleRole": "node",
           "position": {
             "left": 480,
-            "top": 521,
+            "top": 520,
             "width": 328,
             "height": 86
-          },
-          "fill": "#1D3B35",
-          "lineColor": "#527366",
-          "lineWidth": 1
+          }
         },
         {
           "type": "text",
           "text": "Socket.IO",
+          "styleRole": "nodeTitle",
           "position": {
             "left": 508,
-            "top": 540,
+            "top": 542,
             "width": 270,
             "height": 40
-          },
-          "fontSize": 30,
-          "color": "#F6F4EB",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
           }
         },
         {
           "type": "text",
           "text": "业务事件",
+          "styleRole": "relation",
           "position": {
-            "left": 665,
-            "top": 465,
-            "width": 130,
-            "height": 32
-          },
-          "fontSize": 20,
-          "color": "#C7D6CD",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "left": 666,
+            "top": 462,
+            "width": 140,
+            "height": 30
           }
         },
         {
           "type": "text",
           "text": "库存更新通知",
+          "styleRole": "relation",
           "position": {
             "left": 108,
-            "top": 487,
-            "width": 220,
-            "height": 35
-          },
-          "fontSize": 23,
-          "color": "#C7D6CD",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 486,
+            "width": 235,
+            "height": 32
           }
         },
         {
           "type": "text",
-          "text": "虚构方案：同一 Node.js 服务内划分请求处理与事件推送",
-          "position": {
-            "left": 480,
-            "top": 642,
-            "width": 736,
-            "height": 32
-          },
-          "fontSize": 21,
-          "color": "#9DB9AB",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          }
+          "text": "虚构设计示例：请求处理与事件推送位于同一 Node.js 服务。",
+          "styleRole": "footer"
         }
       ],
       "connectors": [
@@ -338,432 +191,256 @@
           "from": "browser",
           "to": "app",
           "fromSide": "right",
-          "toSide": "left",
-          "color": "#B3D0B8",
-          "width": 2
+          "toSide": "left"
         },
         {
           "from": "app",
           "to": "db",
           "fromSide": "right",
-          "toSide": "left",
-          "color": "#B3D0B8",
-          "width": 2
+          "toSide": "left"
         },
         {
           "from": "app",
           "to": "socket",
           "fromSide": "bottom",
-          "toSide": "top",
-          "color": "#B3D0B8",
-          "width": 2
+          "toSide": "top"
         },
         {
           "from": "socket",
           "to": "browser",
           "fromSide": "left",
           "toSide": "bottom",
-          "color": "#B3D0B8",
-          "width": 2,
           "kind": "elbow"
         }
       ],
-      "notes": "独立构造的仓储系统设计示例，仅用于演示可编辑图示与布局。不是用户项目实现或运行结果。关系基数、唯一性和事务行为是示例设定，需要真实项目提供 SQL 与源码证据后才能用于成果汇报。",
+      "notes": "独立构造的仓储设计示例，不是用户项目或实测结果。数据库关系、唯一性与事务是本示例设定。两页共享同一 designProfile，角色决定字体、标题位置、颜色与图示样式。",
       "sources": [
         "examples/software-report/README.md"
       ]
     },
     {
-      "background": "#F4F2EB",
       "requireEditableText": true,
       "elements": [
         {
           "type": "text",
-          "text": "示例：数据库设计",
-          "position": {
-            "left": 64,
-            "top": 48,
-            "width": 1000,
-            "height": 32
-          },
-          "fontSize": 20,
-          "color": "#56776C",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          }
+          "text": "02 / 虚构数据库示例",
+          "styleRole": "sectionLabel"
         },
         {
           "type": "text",
           "text": "仓库、库存与变更流水",
-          "position": {
-            "left": 64,
-            "top": 103,
-            "width": 1100,
-            "height": 68
-          },
-          "fontSize": 48,
-          "color": "#173A32",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          }
+          "styleRole": "title"
         },
         {
           "type": "text",
           "text": "虚构核心表子集；PK 为主键，FK 为外键",
+          "styleRole": "caption",
           "position": {
             "left": 64,
-            "top": 176,
-            "width": 1000,
-            "height": 34
-          },
-          "fontSize": 21,
-          "color": "#62766B",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 158,
+            "width": 1152,
+            "height": 30
           }
         },
         {
           "type": "shape",
-          "id": "boards",
-          "geometry": "rect",
+          "id": "warehouses",
+          "styleRole": "node",
           "position": {
             "left": 64,
-            "top": 266,
+            "top": 244,
             "width": 248,
-            "height": 245
-          },
-          "fill": "#FFFFFF",
-          "lineColor": "#CCD6D1",
-          "lineWidth": 1
+            "height": 248
+          }
         },
         {
           "type": "text",
           "text": "warehouses",
+          "styleRole": "nodeTitle",
           "position": {
             "left": 84,
-            "top": 284,
-            "width": 210,
+            "top": 264,
+            "width": 220,
             "height": 40
-          },
-          "fontSize": 28,
-          "color": "#173A32",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
           }
         },
         {
           "type": "text",
           "text": "PK  id\nname\ncode（唯一）",
+          "styleRole": "nodeBody",
           "position": {
             "left": 84,
-            "top": 338,
-            "width": 210,
-            "height": 88
-          },
-          "fontSize": 22,
-          "color": "#425E50",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 325,
+            "width": 218,
+            "height": 110
           }
         },
         {
           "type": "shape",
-          "id": "posts",
-          "geometry": "rect",
+          "id": "stocks",
+          "styleRole": "focus",
           "position": {
             "left": 480,
-            "top": 266,
+            "top": 244,
             "width": 298,
-            "height": 245
-          },
-          "fill": "#E4EBDD",
-          "lineColor": "#91AA96",
-          "lineWidth": 1
+            "height": 248
+          }
         },
         {
           "type": "text",
           "text": "stocks  库存",
+          "styleRole": "nodeTitle",
           "position": {
             "left": 502,
-            "top": 284,
+            "top": 264,
             "width": 255,
             "height": 40
-          },
-          "fontSize": 29,
-          "color": "#173A32",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
           }
         },
         {
           "type": "text",
           "text": "PK  id\nFK  warehouse_id\nFK  product_id\nquantity",
+          "styleRole": "nodeBody",
           "position": {
             "left": 502,
-            "top": 342,
+            "top": 325,
             "width": 266,
             "height": 145
-          },
-          "fontSize": 22,
-          "color": "#425E50",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
           }
         },
         {
           "type": "shape",
-          "id": "replies",
-          "geometry": "rect",
+          "id": "stock-moves",
+          "styleRole": "node",
           "position": {
             "left": 946,
-            "top": 266,
+            "top": 244,
             "width": 270,
-            "height": 245
-          },
-          "fill": "#FFFFFF",
-          "lineColor": "#CCD6D1",
-          "lineWidth": 1
+            "height": 248
+          }
         },
         {
           "type": "text",
           "text": "stock_moves",
+          "styleRole": "nodeTitle",
           "position": {
             "left": 966,
-            "top": 284,
-            "width": 235,
+            "top": 264,
+            "width": 239,
             "height": 40
-          },
-          "fontSize": 28,
-          "color": "#173A32",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
           }
         },
         {
           "type": "text",
           "text": "PK  id\nFK  stock_id\ndelta_qty\ncreated_at",
+          "styleRole": "nodeBody",
           "position": {
             "left": 966,
-            "top": 342,
+            "top": 325,
             "width": 239,
             "height": 145
-          },
-          "fontSize": 21,
-          "color": "#425E50",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
           }
         },
         {
           "type": "text",
           "text": "1",
+          "styleRole": "relation",
           "position": {
             "left": 324,
-            "top": 352,
-            "width": 34,
-            "height": 32
-          },
-          "fontSize": 23,
-          "color": "#56776C",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 332,
+            "width": 35,
+            "height": 30
           }
         },
         {
           "type": "text",
           "text": "0..N",
+          "styleRole": "relation",
           "position": {
             "left": 406,
-            "top": 352,
+            "top": 332,
             "width": 68,
-            "height": 32
-          },
-          "fontSize": 23,
-          "color": "#56776C",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "height": 30
           }
         },
         {
           "type": "text",
           "text": "1",
+          "styleRole": "relation",
           "position": {
             "left": 792,
-            "top": 352,
-            "width": 34,
-            "height": 32
-          },
-          "fontSize": 23,
-          "color": "#56776C",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 332,
+            "width": 35,
+            "height": 30
           }
         },
         {
           "type": "text",
           "text": "0..N",
+          "styleRole": "relation",
           "position": {
             "left": 864,
-            "top": 352,
+            "top": 332,
             "width": 78,
-            "height": 32
-          },
-          "fontSize": 23,
-          "color": "#56776C",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "height": 30
           }
         },
         {
           "type": "text",
           "text": "库存约束",
+          "styleRole": "lead",
           "position": {
             "left": 64,
-            "top": 557,
-            "width": 242,
-            "height": 36
-          },
-          "fontSize": 27,
-          "color": "#173A32",
-          "bold": true,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 548,
+            "width": 248,
+            "height": 40
           }
         },
         {
           "type": "text",
-          "text": "stocks.product_id 引用商品表；每个仓库可保存多种商品库存。",
+          "text": "stocks.product_id 引用商品表，仓库与商品组合唯一。",
+          "styleRole": "nodeBody",
           "position": {
             "left": 330,
-            "top": 553,
-            "width": 883,
-            "height": 38
-          },
-          "fontSize": 22,
-          "color": "#425E50",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 548,
+            "width": 886,
+            "height": 35
           }
         },
         {
           "type": "text",
-          "text": "仓库与商品的组合唯一，库存更新与流水记录置于同一事务。",
+          "text": "库存更新与流水记录放在同一事务中。",
+          "styleRole": "nodeBody",
           "position": {
             "left": 330,
-            "top": 601,
-            "width": 883,
-            "height": 38
-          },
-          "fontSize": 22,
-          "color": "#425E50",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
+            "top": 593,
+            "width": 886,
+            "height": 35
           }
         },
         {
           "type": "text",
-          "text": "这是设计演示；实际汇报必须根据项目 SQL 和实现重新核对。",
-          "position": {
-            "left": 330,
-            "top": 649,
-            "width": 883,
-            "height": 30
-          },
-          "fontSize": 20,
-          "color": "#64756D",
-          "bold": false,
-          "insets": {
-            "left": 0,
-            "right": 0,
-            "top": 0,
-            "bottom": 0
-          }
+          "text": "此页是设计演示；实际项目须根据源码与 SQL 重新核对。",
+          "styleRole": "footer"
         }
       ],
       "connectors": [
         {
-          "from": "boards",
-          "to": "posts",
+          "from": "warehouses",
+          "to": "stocks",
           "fromSide": "right",
           "toSide": "left",
-          "color": "#5B8276",
-          "width": 2,
           "arrow": false
         },
         {
-          "from": "posts",
-          "to": "replies",
+          "from": "stocks",
+          "to": "stock-moves",
           "fromSide": "right",
           "toSide": "left",
-          "color": "#5B8276",
-          "width": 2,
           "arrow": false
         }
       ],
-      "notes": "独立构造的仓储系统设计示例，仅用于演示可编辑图示与布局。不是用户项目实现或运行结果。关系基数、唯一性和事务行为是示例设定，需要真实项目提供 SQL 与源码证据后才能用于成果汇报。",
+      "notes": "独立构造的仓储设计示例，不是用户项目或实测结果。数据库关系、唯一性与事务是本示例设定。两页共享同一 designProfile，角色决定字体、标题位置、颜色与图示样式。",
       "sources": [
         "examples/software-report/README.md"
       ]

@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process';
 import { buildDeck } from '../scripts/build_editable_deck.mjs';
 
 const options = { moduleRoot: process.env.RUNTIME_NODE_MODULES };
+const sharedProfile = JSON.parse(await fs.readFile(new URL('../references/design-profiles/technical-editorial.json', import.meta.url), 'utf8'));
 const node = (id, left) => ({ type:'shape', id, position:{left,top:100,width:200,height:100} });
 const fixture = () => ({
  fontFamily:'Arial',
@@ -63,6 +64,30 @@ with zipfile.ZipFile(sys.argv[1]) as z:
  assert all(int(c.get('marT','-1'))==95250 for c in cells), '10px top padding did not export'
  print('Native endpoints, arrow direction, table cells and padding verified')
 `;
+ const result=execFileSync(process.env.RUNTIME_PYTHON??'python',['-c',check,output],{encoding:'utf8'});
+ assert.match(result,/verified/);
+});
+test('shared design values reach native PPTX objects', async () => {
+ const s = {designProfile:sharedProfile,slides:[{elements:[
+  {type:'text',styleRole:'title',text:'Native profile title'},
+  {type:'shape',styleRole:'focus',id:'service',position:{left:64,top:220,width:300,height:140}}
+ ]}]};
+ const {presentation,PresentationFile,designReport}=await buildDeck(s,options);
+ assert.equal(designReport.profileId, sharedProfile.id);
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'ppt-profile-test-'));
+ const output=path.join(dir,'profile.pptx');
+ await (await PresentationFile.exportPptx(presentation)).save(output);
+ const check='import sys,zipfile,xml.etree.ElementTree as E\n' +
+ "ns={'p':'http://schemas.openxmlformats.org/presentationml/2006/main','a':'http://schemas.openxmlformats.org/drawingml/2006/main'}\n" +
+ "with zipfile.ZipFile(sys.argv[1]) as z:\n" +
+ " r=E.fromstring(z.read('ppt/slides/slide1.xml'))\n" +
+ " assert r.find('.//p:bg/p:bgPr/a:solidFill/a:srgbClr',ns).get('val')=='F7F8FC'\n" +
+ " title=next(s for s in r.findall('.//p:sp',ns) if 'Native profile title' in ''.join(s.itertext()))\n" +
+ " off=title.find('p:spPr/a:xfrm/a:off',ns)\n" +
+ " assert int(off.get('x'))==64*9525 and int(off.get('y'))==76*9525\n" +
+ " assert title.find('.//a:rPr',ns).get('sz')=='3300'\n" +
+ " assert any(e.get('val')=='EAF0FF' for e in r.findall('.//p:sp/p:spPr/a:solidFill/a:srgbClr',ns))\n" +
+ " print('Native design profile verified')\n";
  const result=execFileSync(process.env.RUNTIME_PYTHON??'python',['-c',check,output],{encoding:'utf8'});
  assert.match(result,/verified/);
 });

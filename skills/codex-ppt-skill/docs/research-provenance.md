@@ -50,3 +50,14 @@ Humanizer 来自 [Bryce1188/humanizer](https://github.com/Bryce1188/humanizer)�
 | [Duarte 演示设计](https://www.duarte.com/training/presentation-design-training/) | 视觉组织服务于演讲中的主要信息 |
 
 落地规则见 [软件项目汇报](software-project-report.md)。本次试做区分真实界面演示与后端实测，并在最终导出中发现、修复了连接线方向问题。公开示例为独立构造的仓储方案，不含用户项目截图或个人信息。
+
+## ppt-master 与 slides_maker 的定向补充
+
+核对日期：2026-11-06。检查了两者的实际技能入口及相关工作流文件，而不只比较 README 宣传。核对时两仓库根许可证均为 MIT；本次只借鉴方法并独立实现，没有移植代码、提示词全文、模板或运行时。
+
+| 固定来源 | 阅读重点 | 本版落地 |
+| --- | --- | --- |
+| [ppt-master Strategist](https://github.com/hugohe3/ppt-master/blob/f3633771fe699d327f02ae86393831bbcf5169f7/skills/ppt-master/references/strategist.md)、template-designer.md、visual-styles/blueprint.md | 内容大纲与视觉规范一起规划；形状、字级、线条、强调规则组成视觉身份 | style-library.md 和独立编写的版本化设计配置；构建器按角色继承样式，检查无说明的视觉偏离 |
+| [slides_maker content planner](https://github.com/addsumtech/slides_maker/blob/b26450dfd904c82e71533f47019a859a029a153d/skills/slide-maker/agents/content-planner.md)、content-plan-spec.md、style-analysis.md | 阅读来源后形成理解简报，追踪主张，解释图表的比较与限制；从参考提取可迁移的风格系统 | source-understanding.md 中的来源版本、简报与证据对应；保留论文、代码、实测之间的边界；固定布局规则再按内容换构图 |
+
+未照搬其确认次数、篇幅配额、默认并行评审或另一套导出引擎。当前用户授权的制作节奏与宿主工具优先。用源 JSON 的样式检查验证一致性约束，用最终 PPTX 的实际渲染判断页面效果，两者不能互相替代。

@@ -1,4 +1,4 @@
 interface:
   display_name: "Codex PPT Skill"
-  short_description: "老师任务与项目证据生成 PPT，自动润色，可选背景。"
-  default_prompt: "Use $codex-ppt-skill to turn this assignment and project into a presentation. Read Humanizer automatically, map requirements to evidence, choose or preview backgrounds as requested, and verify the final editable PPTX and rendered slides."
+  short_description: "项目、代码与论文生成可编辑 PPT，复用统一视觉规范。"
+  default_prompt: "Use $codex-ppt-skill to understand these repository, code, paper or assignment sources, trace the content to evidence, reuse a topic-appropriate visual profile, apply Humanizer, and deliver a verified editable PPTX with previews and revision sources."

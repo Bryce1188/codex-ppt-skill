@@ -7,6 +7,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
+import { resolveDesignProfile } from './design_profile.mjs';
 
 function check(ok, message) { if (!ok) throw new Error(message); }
 function box(position, canvas, label) {
@@ -20,6 +21,8 @@ async function loadArtifact(moduleRoot) {
   return import(pathToFileURL(require.resolve('@oai/artifact-tool')).href);
 }
 export async function buildDeck(spec, { specDir = '.', moduleRoot } = {}) {
+  const resolved = await resolveDesignProfile(spec, specDir);
+  spec = resolved.spec;
   check(spec && Array.isArray(spec.slides) && spec.slides.length, 'spec.slides must be nonempty');
   check(typeof spec.fontFamily === 'string' && spec.fontFamily.trim(), 'fontFamily is required; verify it exists in the rendering environment');
   const canvas = spec.slideSize ?? { width: 1280, height: 720 };
@@ -115,7 +118,7 @@ export async function buildDeck(spec, { specDir = '.', moduleRoot } = {}) {
     if (notes) slide.speakerNotes.textFrame.setText(notes);
     counts.push(summary);
   }
-  return { presentation, PresentationFile, counts };
+  return { presentation, PresentationFile, counts, designReport: resolved.report };
 }
 export async function exportPreviews(presentation, directory) {
   await fs.mkdir(directory, { recursive: true });
@@ -133,10 +136,10 @@ async function main() {
   const specPath = path.resolve(opts['--spec']), out = path.resolve(opts['--out']);
   try { await fs.access(out); throw new Error(`Output exists: ${out}. Choose a new filename.`); } catch (e) { if (e.code !== 'ENOENT') throw e; }
   const spec = JSON.parse((await fs.readFile(specPath,'utf8')).replace(/^\uFEFF/,''));
-  const { presentation, PresentationFile, counts } = await buildDeck(spec, { specDir: path.dirname(specPath), moduleRoot: opts['--module-root'] });
+  const { presentation, PresentationFile, counts, designReport } = await buildDeck(spec, { specDir: path.dirname(specPath), moduleRoot: opts['--module-root'] });
   await fs.mkdir(path.dirname(out), { recursive:true });
   await (await PresentationFile.exportPptx(presentation)).save(out);
   if (opts['--preview-dir']) await exportPreviews(presentation, path.resolve(opts['--preview-dir']));
-  console.log(JSON.stringify({ draft: out, slides: counts, status:'draft_requires_package_and_visual_QA' }, null, 2));
+  console.log(JSON.stringify({ draft: out, slides: counts, designReport, status:'draft_requires_package_and_visual_QA' }, null, 2));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main().catch(e => { console.error(e.message); process.exitCode = 1; });

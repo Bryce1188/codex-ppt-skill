@@ -1,159 +1,45 @@
-# Style Library
+# 可复用视觉规范
 
-Read this when the user asks to save a finished deck style, a sample-slide style, or a user-supplied image/PDF/PPT/PPTX style into the reusable style library.
+新稿先按题材、听众、投影/阅读环境与现有品牌选择视觉身份，再把它保存为本次唯一的 design-profile.json。已有适合的规范优先复用，用户已有模板或参考优先；不需要每次重新搜索背景模板。用户否定过的样稿不能自动记录为偏好。
 
-The goal is to save a reusable visual system, not the current deck's private content.
+## 从参考提取什么
 
-## When To Use
+查看真实代表页：普通内容页、图片页、架构/流程/数据页，必要时查看封面。提取字体与字级、标题基线、页边距、配色用途、图示线宽、箭头、表格、图注、图片处理和页面密度。不能仅凭封面、XML 字体列表或“科技、简洁”等风格词决定整套视觉。
 
-Use this workflow when the user says things like:
+同一风格保留不同的信息结构：截图页以操作证据为主，架构页以关系为主，结果页以比较为主。固定的是视觉规则，布局随内容变化。选择同一套内页底色；需要封面/章节变体时明确记录用途，不能为避免重复逐页切换深浅底。
 
-- Save this style.
-- Add this PPT style to the style library.
-- Let future decks use this style.
-- Turn this image/PDF/PPT/PPTX style into a built-in reference.
-- Save the style from the finished deck.
+## 保存与复用
 
-If the user only wants to use a style once, extract a temporary style description for the current deck instead of writing a new `references/` file.
+- 临时规范放当前工作目录的 design-profile.json，随生成源交付以便后续修改。
+- 用户希望以后复用时，保存到个人风格库，或其授权的 skill 资源位置。规范只保存设计，不带项目文案、数据、截图、个人信息或未经许可的品牌资产。
+- 新名称使用独立文件；已有名称默认追加版本，除非用户明确要求替换。记录 id、version、来源参考、适用场景和本次选用理由。
+- 本包的 [工程白蓝](../references/design-profiles/technical-editorial.json) 是可执行示例，适合工程说明，不是所有项目的默认配色。其他主题可以提取新配置，旧 references/*.md 仍可作为视觉方向参考。
 
-## Inspect The Visual Source
+## 原生 PPTX 使用同一个配置
 
-Use the actual visible pages as the source of truth.
+构建 JSON 的 designProfile 可以是相对 JSON 文件的路径，或内联配置。配置包含：
 
-- For a finished codex-ppt deck, inspect the final `origin_image/slide_XX.png` files or exported slide page images.
-- For a sample slide, inspect the approved sample image.
-- For user-provided image references, inspect the image itself.
-- For PDF/PPT/PPTX references, first render or export representative pages/slides into real page images, then inspect those images. Do not infer the style from file structure, text, XML, metadata, or object hierarchy alone.
+| 字段 | 用途 |
+| --- | --- |
+| schemaVersion / id / version | 格式与视觉版本标识 |
+| fontFamily / slideSize / backgrounds | 字体、画布与内容/章节背景 |
+| textStyles | 按标题、正文、图注等角色固定字级、颜色、粗细；标题可固定位置 |
+| shapeStyles / connectorStyle | 技术图节点与连接线的统一样式 |
+| tableStyle / chartStyle | 原生表格和图表的默认字体、颜色和边框 |
+| layoutRules / layouts / imageTreatment | 页边距、构图、截图和背景的语义规则，须人工与渲染复核 |
 
-Inspect enough pages to capture the style system. Prefer at least one cover or opener, one ordinary content slide, one diagram/process/data slide when available, and one closing or summary slide. If the deck has obvious section-specific variants, record those variants inside the style file.
+文字和技术节点通过 styleRole 引用规范，图表、表格和连接线自动继承相应样式。局部确实需要偏离时填写 designException 说明原因；更改整套风格应改共享配置并更新版本。
 
-## Extract The Style System
+运行 node scripts/design_profile.mjs --spec deck.json 可在生成前发现底色、字号、标题位置、图示边框等无说明的偏离。构建器同样执行检查。检查只针对源 JSON 的默认样式与例外，不检查审美，也不能证明 PowerPoint/WPS 导出效果；最终文件仍须重新渲染查看。
 
-Extract reusable visual rules:
+## 背景与视觉资产
 
-- `style_name`: short reusable name.
-- `best_for`: suitable scenarios and audiences.
-- `visual_direction`: one concise description of the style identity.
-- `canvas`: aspect ratio, background, composition, density, whitespace.
-- `color_palette`: primary, secondary, accent, neutral colors, plus usage rules.
-- `typography`: title, body, labels, hierarchy, alignment, text quality rules.
-- `layout_patterns`: recurring page types and composition patterns.
-- `layout_usage_rule`: how to vary layouts while keeping the same identity.
-- `layout_blueprints`: 2-4 reusable composition blueprints, described semantically rather than copied from one slide.
-- `visual_elements`: allowed and avoided icons, diagrams, cards, textures, decorations, photos, charts.
-- `image_treatment`: how photos, screenshots, charts, or illustrations are handled.
-- `rendering_constraints`: rules the image model should follow.
+纯色内容页可以构成完整视觉风格。主题需要插画/纹理时，用同一份背景方向描述固定颜色、材质、光线、主体位置和留白；保存可替换的背景原图与来源。无文字背景上叠原生文字、图表与图片，不把整页生图当成可编辑成品。
 
-Do not save private or one-off content as style:
+题材影响信息设计，例如软件项目强调运行界面与调用关系，AI 研究强调模型流程与结果比较。不要把所有 AI 项目都画成神经网络光点，也不要为“统一”给每页加相同的装饰卡片。
 
-- Do not save the user's original article text, business data, personal information, customer names, private project names, paper results, exact quotes, or slide copy.
-- Do not save source images or screenshots as required dependencies of the style file.
-- Do not preserve identifiable logos or brand names unless the user explicitly asks for a reusable brand style.
-- Do not make the style depend on files outside `references/`.
+## 整套检查与修改
 
-## Name The Style
+先看缩略图确认视觉身份，再看全尺寸确认可读性。检查标题是否处于同一基线、字号层级是否稳定、图示与表格是否同属一套规则，背景是否干扰证据。标题过长先改写或调整结构，不逐页任意缩字。
 
-Name the file:
-
-```text
-references/{style_name}.md
-```
-
-Naming rules:
-
-- Prefer a short Chinese style name, usually 2-8 Chinese characters or a concise Chinese phrase.
-- Name the reusable visual style, not the project, client, paper, or event.
-- Avoid personal names, company names, customer names, paper titles, or temporary task names.
-- Avoid vague names like `我的风格1`, `好看风`, or `新风格`.
-- Good examples: `深色数据科技风`, `极简发布会风`, `柔和学术插画风`, `高密度咨询风`.
-
-If the target filename already exists, ask whether to overwrite, merge, or choose a new name.
-
-## Write The Style File
-
-Match the existing `references/*.md` structure:
-
-    # {style_name}
-
-    **适用场景:**
-    - ...
-    - ...
-
-    **GPT-Image-2 风格 Brief:**
-    ```json
-    {
-      "type": "16:9 full-slide PowerPoint image",
-      "style_name": "{style_name}",
-      "best_for": "...",
-      "visual_direction": "...",
-      "canvas": {
-        "aspect_ratio": "16:9",
-        "background": "...",
-        "composition": "...",
-        "density": "..."
-      },
-      "color_palette": {
-        "primary": "...",
-        "secondary": "...",
-        "accent": "...",
-        "neutral": "...",
-        "rule": "..."
-      },
-      "typography": {
-        "title": "...",
-        "body": "...",
-        "labels": "...",
-        "text_quality": "..."
-      },
-      "layout_patterns": [
-        "...",
-        "..."
-      ],
-      "layout_usage_rule": "...",
-      "layout_blueprints": [
-        {
-          "name": "...",
-          "sections": [
-            {"position": "...", "count": 1, "labels": ["..."]}
-          ]
-        }
-      ],
-      "visual_elements": {
-        "allowed": "...",
-        "avoid": "..."
-      },
-      "image_treatment": {
-        "photos": "...",
-        "screenshots": "...",
-        "charts": "...",
-        "illustrations": "..."
-      },
-      "rendering_constraints": [
-        "...",
-        "..."
-      ]
-    }
-    ```
-
-The JSON should be directly reusable as a slide generation style brief. Keep it descriptive enough for future agents, but avoid embedding task-specific content.
-
-## Make The Style Discoverable
-
-After writing `references/{style_name}.md`, update `docs/outline-style-and-sample.md`.
-
-Add the new file to the `Available references` list:
-
-```markdown
-- `references/{style_name}.md`
-```
-
-That list is what future style confirmation steps read before offering or using reusable style references.
-
-## Final Response
-
-Report:
-
-- The new style name.
-- The saved `references/{style_name}.md` path.
-- That `docs/outline-style-and-sample.md` was updated.
-- A one-sentence note on how to request it later, for example: "以后可以说：用「深色数据科技风」生成这份 PPT。"
+局部改稿保留本次配置版本、数据、素材和其他页面。全局换风格通过修改共享配置完成；重新导出后检查受影响页和整套节奏。结果按 [可编辑生成与修改](editable-production.md) 交付。

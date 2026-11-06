@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "id": "technical-editorial",
+  "version": "1.0.0",
+  "name": "工程白蓝",
+  "bestFor": [
+    "软件项目工作汇报",
+    "工程答辩",
+    "方法与实验说明"
+  ],
+  "designIntent": "以真实界面、技术关系和数据证据为主体。统一浅底、深蓝文字和克制的蓝色强调，避免逐页更换视觉语言。",
+  "fontFamily": "Microsoft YaHei",
+  "slideSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "backgrounds": {
+    "content": "#F7F8FC",
+    "cover": "#F7F8FC",
+    "section": "#F7F8FC"
+  },
+  "textStyles": {
+    "sectionLabel": {
+      "fontSize": 18,
+      "color": "#3155D9",
+      "bold": true,
+      "position": {
+        "left": 64,
+        "top": 32,
+        "width": 1152,
+        "height": 28
+      },
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "title": {
+      "fontSize": 44,
+      "color": "#1D2D47",
+      "bold": true,
+      "position": {
+        "left": 64,
+        "top": 76,
+        "width": 1152,
+        "height": 64
+      },
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "lead": {
+      "fontSize": 28,
+      "color": "#1D2D47",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "body": {
+      "fontSize": 24,
+      "color": "#40516B",
+      "bold": false,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "nodeTitle": {
+      "fontSize": 28,
+      "color": "#1D2D47",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "nodeBody": {
+      "fontSize": 22,
+      "color": "#40516B",
+      "bold": false,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "relation": {
+      "fontSize": 20,
+      "color": "#3155D9",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "caption": {
+      "fontSize": 18,
+      "color": "#627089",
+      "bold": false,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "footer": {
+      "fontSize": 18,
+      "color": "#627089",
+      "bold": false,
+      "position": {
+        "left": 64,
+        "top": 667,
+        "width": 1152,
+        "height": 28
+      },
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    }
+  },
+  "shapeStyles": {
+    "node": {
+      "geometry": "rect",
+      "fill": "#FFFFFF",
+      "lineColor": "#C7D1DF",
+      "lineWidth": 1
+    },
+    "focus": {
+      "geometry": "rect",
+      "fill": "#EAF0FF",
+      "lineColor": "#9BAFEF",
+      "lineWidth": 1
+    }
+  },
+  "connectorStyle": {
+    "color": "#6C82A7",
+    "width": 2,
+    "style": "solid"
+  },
+  "tableStyle": {
+    "fontSize": 22,
+    "headerFill": "#EAF0FF",
+    "bodyFill": "#FFFFFF",
+    "headerColor": "#1D2D47",
+    "bodyColor": "#40516B",
+    "borderColor": "#D8E0ED",
+    "borderWidth": 1,
+    "cellPadding": {
+      "left": 16,
+      "right": 16,
+      "top": 12,
+      "bottom": 12
+    }
+  },
+  "chartStyle": {
+    "labelSize": 22,
+    "color": "#40516B"
+  },
+  "layoutRules": {
+    "margin": 64,
+    "contentTop": 184,
+    "gutter": 32,
+    "captionGap": 18,
+    "titleMaxLines": 1
+  },
+  "layouts": {
+    "feature": "固定页眉下放一张主截图，旁边仅解释与当前用户任务有关的操作。截图比例保真。",
+    "architecture": "同层节点水平排列，主调用路径居中，事件支路放下方，连接标签靠近对应线段。",
+    "dataModel": "实体在同一基线对齐，PK/FK 与关系基数靠近实体；额外约束放底部说明区。",
+    "results": "一个主要结果图配必要口径；完整表格和实现细节放附录。"
+  },
+  "imageTreatment": {
+    "evidence": "contain，保留原图、坐标和标签",
+    "background": "默认用主题底色；需要题材插图时固定构图、色温与留白，不逐页搜索新模板"
+  },
+  "forbidden": [
+    "把所有项目都套成蓝色科技风",
+    "同一套内页随意切换深浅底",
+    "通过换背景代替信息设计",
+    "把原生图表转换成整页截图"
+  ],
+  "chartPalette": [
+    "#3155D9",
+    "#8098C9",
+    "#BDCADF",
+    "#64748B"
+  ]
+}

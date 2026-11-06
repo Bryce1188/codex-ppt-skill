@@ -52,3 +52,18 @@ node --test tests/test_editable_builder.mjs
 ```
 
 设置 `RUNTIME_NODE_MODULES` 指向宿主模块目录；`RUNTIME_PYTHON` 可指定 Python。该检查覆盖无效连接和最终 PPTX 的节点附着、箭头方向、原生表格与内边距。它不评判图示语义或视觉效果，也不属于无宿主运行时的 GitHub CI。
+
+## 共享设计与后续修改
+
+新稿使用 designProfile 指向本次的设计配置。位置仍为 CSS px，文字/形状的 styleRole 引用配置角色；title 等角色可连位置一起继承，图表、表格与连接线自动继承对应样式。所有普通内页使用同一 content 背景。局部例外写 designException，并在最终预览核对；全局换配色/字级优先修改共享配置并更新版本。
+
+可以先运行 node scripts/design_profile.mjs --spec deck.json 独立检查，不需要 artifact-tool。无 designProfile 的旧构建文件继续支持，但不能据此声称已受统一视觉配置约束。完整字段和风格保存方法见 [风格复用](style-library.md)。
+
+交付修改源时包括 deck.json、copy/data、实际使用的设计配置和素材；用相对路径组织，不依赖作者电脑的绝对路径。不包含密钥、依赖目录或私有外部链接凭证。
+
+- 改文字或数据：改对应 copy/data 或页面元素，保持其他页面与 profile 版本，然后另存导出。
+- 改某页图片：替换独立 image，保留 contain 与原图来源，更新素材清单和散列。
+- 全局改视觉：编辑一份共享 profile 并更新 version，检查所有页面。不要逐页手工改出不同字号或图示边框。
+- 改已有外部 PPTX：先识别原生文字、图片、表格与图表，再用宿主支持的原生编辑方式修改，另存新稿。对导入后退化为图片的对象明确说明；不能把所有页面截成图冒充编辑。
+
+PowerPoint/WPS 兼容性按实际检查记录：包结构、原生对象、宿主导入渲染、在目标应用打开与编辑是不同层次。只完成前三项时如实报告，不写“已通过 PowerPoint/WPS 编辑测试”。复杂母版、公式、动画和特殊字体仍需按目标应用逐项确认。用户只需基础可编辑 PPTX 时，不擅自加装另一套导出引擎。

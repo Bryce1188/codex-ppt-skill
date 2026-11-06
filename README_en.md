@@ -1,111 +1,53 @@
 # Codex PPT Skill
 
-**Turn an assignment and a finished project into a presentation you can explain and edit.**
+Turn repositories, source code, papers and project evidence into editable presentations with a reusable visual system.
 
-[简体中文](README.md) · [Starter prompts](skills/codex-ppt-skill/prompts/start-here.md) · [Reproducible example](skills/codex-ppt-skill/examples/course-report/README.md)
+[中文说明](README.md) · [Prompts](skills/codex-ppt-skill/prompts/start-here.md) · [Software example](skills/codex-ppt-skill/examples/software-report/README.md)
 
-Give Codex your brief, project files and presentation goal. The skill reads the material, asks for consequential missing details, maps requirements to evidence, builds the slides and checks the final PPTX.
+![A shared design profile applied to an editable architecture](assets/showcase/software-report/slide_01.png)
 
-![Editable software architecture example](assets/showcase/software-report/slide_01.png)
+## Understand the source
 
-## Start with an ordinary request
+Read the actual GitHub revision, README, entry points, relevant implementation and results. For papers, use the available document conversion tool and inspect original pages for important tables, figures and formulas. Build a source brief and map slide claims to evidence. Keep the authors' reported contributions, the repository's implementation and the user's measured results distinct. Ordinary engineering projects do not need invented research novelty.
 
-```text
-Use $codex-ppt-skill to make an editable presentation from this assignment
-and my project. It is a five-minute class report.
-Read the files first and ask only for missing details that affect the result.
-Arrange the content, real project images and backgrounds, apply Humanizer,
-then check and deliver the PPTX and previews.
-Assignment: [file or path]
-Project: [path]
-```
+See the [source workflow](skills/codex-ppt-skill/docs/source-understanding.md).
 
-The included prompts and detailed workflow guides are primarily in Chinese. You can request an English presentation.
+## Reuse a visual system
 
-## What it does
+Extract typography, palette roles, title positions, margins, diagram conventions, table styling and image treatment from suitable references. Save one versioned design-profile.json, reuse it when appropriate, and adapt layouts to the content. A new deck does not require another search for background templates.
 
-- Maps each assignment requirement to project evidence, slides and visible gaps.
-- Discovers available Superpowers process skills for clarification, planning and completion checks. Falls back to a documented lightweight flow when absent.
-- Automatically reads Humanizer for two editorial passes, preserving facts, numbers, terms and limitations. A pinned, checksum-verified copy is included.
-- Finds existing screenshots and outputs. With available tools and a runnable project, guides real UI capture and records its source.
-- Supports automatic backgrounds, real style previews for user choice, supplied images and existing templates.
-- Uses native text, charts and tables by default. Exact result figures remain separate original images.
-- Checks plan coverage, image hashes and slide relationships, then requires inspection of renders from the final PPTX.
+The builder reads this profile. Text and diagram nodes reference style roles; tables, charts and connectors inherit shared defaults. Unexplained changes in headings, colors or diagram styling fail the source check. Deliberate exceptions are recorded. Rendered review is still required.
 
-Superpowers handles the process; the host presentation and image tools do the rendering. Running a resolver alone does not invoke a skill.
+![The same profile applied to a database diagram](assets/showcase/software-report/slide_02.png)
 
-## Actual output
+Both pages use an independently constructed warehouse scenario and the [technical editorial profile](skills/codex-ppt-skill/references/design-profiles/technical-editorial.json). They are not a real user's project or measured result. This engineering example is not a universal palette for every topic. See [style extraction and reuse](skills/codex-ppt-skill/docs/style-library.md).
 
-These are renders imported from the final six-slide example. The assignment is fictional and the twelve scores are synthetic. The included project computes the reported results.
+## Generate and revise native PPTX
 
-| Native chart | Native table |
-| --- | --- |
-| ![Score distribution](assets/showcase/course-report/slide_04.png) | ![Input validation](assets/showcase/course-report/slide_05.png) |
+Text, charts, tables, simple technical diagrams and images remain separate objects. Deliver the final PPTX and previews, with the generation source, used profile and assets for revision. Change specific pages while keeping the current visual profile, or update the profile for a global redesign.
 
-| Light | Warm | Dark |
-| --- | --- | --- |
-| ![Light style](assets/showcase/styles/clean.png) | ![Warm style](assets/showcase/styles/warm.png) | ![Dark style](assets/showcase/styles/dark.png) |
+Complex imported masters, animation and equations depend on host support. Package validation and host rendering do not establish that a file has been opened and edited in both PowerPoint and WPS. State what was actually tested. Whole-slide images are an explicit user choice, not the default editable output.
 
-These style previews use identical data. User-choice mode waits for an actual selection. Automatic mode proceeds after internal review.
-
-## Editing options
-
-| Mode | Editable objects |
-| --- | --- |
-| editable, default | Native text, charts and tables; replaceable images |
-| hybrid | Native content over a textless bitmap background |
-| image | One flattened image per slide |
-| template | Existing template objects, subject to their original structure |
-
-Bitmap backgrounds can be replaced or regenerated. Request native shapes or editable vectors if individual background elements must be editable in PowerPoint. Local edits preserve unaffected slides.
-
-The [repair guide](skills/codex-ppt-skill/docs/ai-ppt-repair.md) addresses generic claims, dense text, repetitive cards, unreliable charts, fabricated screenshots, background clutter and export problems. It does not promise an AI-detector outcome.
+Humanizer is applied at the content and final-editing stages. Superpowers can support intake, planning and verification when installed; neither replaces source reading, visual design or rendering tools.
 
 ## Install
 
-Ask Codex:
+Ask Codex to install skills/codex-ppt-skill from https://github.com/Bryce1188/codex-ppt-skill. Install the skill subdirectory rather than the repository root.
+
+Python 3.10+ supports scanning and structural checks. The bundled native builder requires Node.js and the host-provided @oai/artifact-tool runtime. No alternate slide engine is installed automatically. Screenshots, image generation and document conversion use tools actually available in the environment.
+
+## Checks
 
 ```text
-Install the skill at skills/codex-ppt-skill from
-https://github.com/Bryce1188/codex-ppt-skill.
-```
-
-Or copy the entire `skills/codex-ppt-skill` directory into your Codex skills folder, such as `~/.codex/skills/codex-ppt-skill`, and refresh the session as required by your client. The repository root is not the skill entrypoint.
-
-Requirements:
-- A Codex environment with local skills, file access and script execution.
-- Python 3.10+ for standard-library helpers.
-- Host presentation tooling for native PPTX. The included Node builder requires the host-provided `@oai/artifact-tool`; it is not guaranteed in a regular npm environment.
-- An available image tool for generated backgrounds; supplied assets or native layouts work without it.
-- An enabled browser/computer tool and runnable project for live screenshots.
-- Superpowers is optional. Humanizer's pinned instructions are bundled.
-
-The skill does not bundle cloud models, a browser or PowerPoint, and does not silently install services.
-
-## Verification
-
-```bash
 python -m unittest discover -s skills/codex-ppt-skill/tests -v
-python skills/codex-ppt-skill/scripts/validate_plan.py skills/codex-ppt-skill/examples/course-report/presentation-plan.json
-python skills/codex-ppt-skill/scripts/resolve_humanizer.py --bundled
+node --test skills/codex-ppt-skill/tests/test_design_profile.mjs
+node skills/codex-ppt-skill/scripts/design_profile.mjs --spec skills/codex-ppt-skill/examples/software-report/deck.json
 ```
 
-There are 23 workflow tests and 3 example-project tests. The six-slide example was checked for native objects, notes and package structure, then rendered from the final PPTX and visually reviewed. The embedded background was matched to its original bytes. Live browser capture was not tested because the browser was disabled; full desktop PowerPoint editing was not tested. See the [verification record](skills/codex-ppt-skill/examples/course-report/verification.md).
+With the host runtime and Python, also run test_editable_builder.mjs to inspect native connector attachments, arrow direction, table padding and profile values in exported PPTX. CI excludes the proprietary host runtime and does not judge visual quality.
 
-CI covers checks that do not require the host presentation runtime. It does not certify visual quality. Generated decks and runtime outputs are excluded from the repository.
+## Attribution
 
-## Sources and license
+Based on ningzimu/codex-ppt-skill, retaining the MIT license. The pinned Humanizer snapshot retains its own license and provenance.
 
-Based on [ningzimu/codex-ppt-skill](https://github.com/ningzimu/codex-ppt-skill), retaining its [MIT license](skills/codex-ppt-skill/LICENSE). This edition adds assignment/evidence mapping, native editable production, process integrations, prompts and validation examples.
-
-The [Humanizer snapshot](skills/codex-ppt-skill/references/humanizer/provenance.json) retains its own [license](skills/codex-ppt-skill/references/humanizer/LICENSE). See [research notes](skills/codex-ppt-skill/docs/research-provenance.md) for sources and design decisions. Restricted third-party templates are not included.
-
-## Software project reports
-
-Use real UI captures for feature pages, native nodes and attached connectors for architecture, and a focused subset of database entities for data design. Check current code and SQL when older documents disagree. Label demo data and distinguish a visible UI from a tested database operation.
-
-![Editable database design example](assets/showcase/software-report/slide_02.png)
-
-These two pages use an independently constructed warehouse scenario, not a user project or measured result. See the [example](skills/codex-ppt-skill/examples/software-report/README.md) and [report workflow](skills/codex-ppt-skill/docs/software-project-report.md). The older three-color previews compare palettes only; real design alternatives must also differ in composition or visual hierarchy.
-
-The optional host integration check is node --test skills/codex-ppt-skill/tests/test_editable_builder.mjs, with RUNTIME_NODE_MODULES and optionally RUNTIME_PYTHON set. It verifies exported connector attachments, direction and native table padding. GitHub CI runs the Python workflow tests; it does not include the proprietary host runtime or judge visual quality.
+This edition independently adapts methods from [ppt-master](https://github.com/hugohe3/ppt-master) for combined content and visual planning, and [slides_maker](https://github.com/addsumtech/slides_maker) for comprehension briefs, claim tracing and visual-system analysis. No upstream templates or export engines were transplanted. See [pinned references and implementation notes](skills/codex-ppt-skill/docs/research-provenance.md).

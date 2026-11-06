@@ -42,3 +42,7 @@ Capture these facts with file evidence when possible:
 - Backend/API project: emphasize architecture, endpoints, data model, reliability, security, and integration proof.
 - Hardware/IoT project: emphasize system diagram, sensor/control loop, demo evidence, and real-world constraints.
 - Design/product prototype: emphasize user problem, information architecture, interaction flow, and visual proof.
+
+## 本次对象包含代码与论文时
+
+先读 [内容理解](source-understanding.md)。README 的目标、当前代码实现、论文中的作者结论和本项目实测分别记录，不用“源码更可靠”把不同问题混在一起。远程仓库的证据固定到实际 commit；关键 PDF 图表、公式和指标回到物理原页核对。
