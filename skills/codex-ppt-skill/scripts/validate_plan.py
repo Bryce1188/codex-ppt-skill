@@ -7,6 +7,33 @@ import sys
 from pathlib import Path
 
 
+def derive_agenda_items(slides: list) -> list:
+    """Derive chapter starts from final slide order, never from typed page numbers."""
+    items, seen, previous = [], set(), None
+    for page in slides:
+        if not isinstance(page, dict):
+            raise ValueError("Agenda: slides must be objects")
+        if page.get("role") in ("cover", "agenda"):
+            continue
+        section = page.get("section")
+        if not isinstance(section, str) or not section.strip():
+            raise ValueError("Agenda: each body slide needs a nonempty section")
+        if section != section.strip():
+            raise ValueError("Agenda: section names must not have surrounding whitespace")
+        number = page.get("number")
+        if type(number) is not int or number < 1:
+            raise ValueError("Agenda: positive integer slide numbers required")
+        if section != previous:
+            if section in seen:
+                raise ValueError("Agenda: a chapter reappears after another chapter: " + section)
+            items.append({"title": section, "start_slide": number})
+            seen.add(section)
+            previous = section
+    if not items:
+        raise ValueError("Agenda: no body chapters found")
+    return items
+
+
 def validate(plan: dict, base_dir: Path) -> dict:
     errors, gaps = [], []
     def need(condition, message):
@@ -61,6 +88,16 @@ def validate(plan: dict, base_dir: Path) -> dict:
             need(bool(notes), f"Slide {index}: required content without evidence needs a visible gap note")
         gaps.extend({"slide": index, "note": note} for note in notes)
     need(requirements.keys() <= covered, f"Uncovered requirements: {sorted(requirements.keys() - covered)}")
+    agenda_pages = [page for page in slides if isinstance(page, dict) and page.get("role") == "agenda"]
+    if agenda_pages:
+        need(len(agenda_pages) == 1, "Exactly one global agenda slide is supported")
+        try:
+            expected_items = derive_agenda_items(slides)
+            for page in agenda_pages:
+                need(page.get("agenda_items") == expected_items,
+                     "Agenda items differ from chapter order or starting pages; run sync_agenda.py")
+        except ValueError as exc:
+            errors.append(str(exc))
     background = plan.get("background", {})
     need(isinstance(background, dict), "background must be an object")
     if isinstance(background, dict):

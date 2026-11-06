@@ -37,7 +37,7 @@ description: 从 GitHub 项目、README、代码、论文 PDF、任务书与已�
 ## 制作流程
 
 1. **理解来源。** 按 [内容理解](docs/source-understanding.md) 记录 GitHub commit、本地版本、论文页码与已读范围。PDF/Office 优先使用可用的 document-to-markdown，关键数字、图表和公式核对原页。项目可运行 python scripts/analyze_project.py <project-root> --out <work-dir> 导航，再实际读 [项目证据](docs/project-report-audit.md)、相关源码、数据与结果。扫描清单不能证明实现或运行成功。
-2. **提炼主线并建立页级计划。** 写 source-brief.md 和 presentation-plan.json，沿用 [要求—证据—页面](docs/assignment-to-deck.md) 的对应。提炼背景、问题、路线、贡献/工程价值、结果和局限，按本次目的选择；不强制凑“创新点”，不把论文报告值说成本项目实测。每页安排主信息、证据与视觉。
+2. **提炼主线并建立页级计划。** 写 source-brief.md 和 presentation-plan.json，沿用 [要求—证据—页面](docs/assignment-to-deck.md) 的对应。提炼背景、问题、路线、贡献/工程价值、结果和局限，按本次目的选择；不强制凑“创新点”，不把论文报告值说成本项目实测。每页安排主信息、证据与视觉。按 [目录与章节](docs/agenda-and-sections.md) 决定目录页；用户要求时必须加入，并随正文同步章节与起始页，目录计入总页数。
 3. **定稿内容。** 按 [内容与版式](docs/content-and-design.md) 写标题、图注和需要的讲稿，执行 Humanizer 内容轮。保留数字、术语、限定条件和来源。老师指定的章节名原样保留。
 4. **锁定一套视觉规范。** 读 [风格提取与复用](docs/style-library.md)，从主题、现有参考或风格库建立本次 design-profile.json。统一字体、标题基线、内页底色、图示和表格样式，按内容改变布局。优先试做功能/方法/数据等代表内页，再看整套缩略图与全尺寸；不能只看封面或只换配色比较。用户未要求审批时，内部检查后继续。
 5. **验证计划并构建。** 执行 python scripts/validate_plan.py <work-dir>/presentation-plan.json。只读选定路线：

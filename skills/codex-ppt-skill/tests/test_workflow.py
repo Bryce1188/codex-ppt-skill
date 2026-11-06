@@ -102,6 +102,40 @@ class PlanTests(unittest.TestCase):
         self.plan["expected_slide_count"] = 7
         self.assertFalse(self.check()["ready_for_production"])
 
+    def add_agenda(self):
+        self.plan["slides"][0]["role"] = "cover"
+        for page, section in zip(self.plan["slides"][1:], ["任务与设计", "任务与设计", "结果与验证", "结果与验证", "结果与验证"]):
+            page["section"] = section
+        self.plan["slides"].insert(1, {"number":2, "title":"汇报内容", "role":"agenda"})
+        for number, page in enumerate(self.plan["slides"], 1):
+            page["number"] = number
+        self.plan["expected_slide_count"] = len(self.plan["slides"])
+        agenda = self.plan["slides"][1]
+        agenda["agenda_items"] = planner.derive_agenda_items(self.plan["slides"])
+        return agenda
+
+    def test_agenda_is_derived_from_final_chapters(self):
+        agenda = self.add_agenda()
+        self.assertEqual(agenda["agenda_items"], [
+            {"title":"任务与设计", "start_slide":3},
+            {"title":"结果与验证", "start_slide":5}])
+        self.assertTrue(self.check()["ready_for_production"])
+
+    def test_stale_agenda_page_or_order_is_blocked(self):
+        agenda = self.add_agenda()
+        agenda["agenda_items"][1]["start_slide"] = 4
+        self.assertFalse(self.check()["ready_for_production"])
+        agenda["agenda_items"] = list(reversed(planner.derive_agenda_items(self.plan["slides"])))
+        self.assertFalse(self.check()["ready_for_production"])
+
+    def test_agenda_requires_complete_contiguous_chapters(self):
+        self.add_agenda()
+        del self.plan["slides"][2]["section"]
+        self.assertFalse(self.check()["ready_for_production"])
+        self.plan["slides"][2]["section"] = "任务与设计"
+        self.plan["slides"][-1]["section"] = "任务与设计"
+        self.assertFalse(self.check()["ready_for_production"])
+
 class EvidenceTests(unittest.TestCase):
     def test_data_sources_are_inventory_candidates(self):
         report = analyzer.analyze(ROOT / "examples/course-report/project", 100)

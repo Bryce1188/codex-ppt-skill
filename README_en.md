@@ -26,6 +26,8 @@ Both pages use an independently constructed warehouse scenario and the [technica
 
 ## Generate and revise native PPTX
 
+An optional editable agenda is derived from the body chapters, counted in the total slide budget, and synchronized after reordering. See the [agenda workflow](skills/codex-ppt-skill/docs/agenda-and-sections.md).
+
 Text, charts, tables, simple technical diagrams and images remain separate objects. Deliver the final PPTX and previews, with the generation source, used profile and assets for revision. Change specific pages while keeping the current visual profile, or update the profile for a global redesign.
 
 Complex imported masters, animation and equations depend on host support. Package validation and host rendering do not establish that a file has been opened and edited in both PowerPoint and WPS. State what was actually tested. Whole-slide images are an explicit user choice, not the default editable output.
