@@ -70,7 +70,7 @@ with zipfile.ZipFile(sys.argv[1]) as z:
 test('shared design values reach native PPTX objects', async () => {
  const s = {designProfile:sharedProfile,slides:[{elements:[
   {type:'text',styleRole:'title',text:'Native profile title'},
-  {type:'shape',styleRole:'focus',id:'service',position:{left:64,top:220,width:300,height:140}}
+  {type:'shape',styleRole:'node',id:'service',position:{left:64,top:220,width:300,height:140}}
  ]}]};
  const {presentation,PresentationFile,designReport}=await buildDeck(s,options);
  assert.equal(designReport.profileId, sharedProfile.id);
@@ -86,7 +86,7 @@ test('shared design values reach native PPTX objects', async () => {
  " off=title.find('p:spPr/a:xfrm/a:off',ns)\n" +
  " assert int(off.get('x'))==64*9525 and int(off.get('y'))==76*9525\n" +
  " assert title.find('.//a:rPr',ns).get('sz')=='3300'\n" +
- " assert any(e.get('val')=='EAF0FF' for e in r.findall('.//p:sp/p:spPr/a:solidFill/a:srgbClr',ns))\n" +
+ " assert any(e.get('val')=='FFFFFF' for e in r.findall('.//p:sp/p:spPr/a:solidFill/a:srgbClr',ns))\n" +
  " print('Native design profile verified')\n";
  const result=execFileSync(process.env.RUNTIME_PYTHON??'python',['-c',check,output],{encoding:'utf8'});
  assert.match(result,/verified/);

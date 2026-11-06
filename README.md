@@ -46,7 +46,7 @@
 
 ![同一配置生成的数据库页](assets/showcase/software-report/slide_02.png)
 
-两页使用同一个[工程白蓝配置](skills/codex-ppt-skill/references/design-profiles/technical-editorial.json)。布局按内容变化，字体、标题基线和图示规则保持一致。这个示例适合工程说明，其他主题应另选或提取适合的视觉身份，不把所有项目都做成同一种科技风。
+两页使用同一个[工程白蓝配置](skills/codex-ppt-skill/references/design-profiles/technical-editorial.json)。布局按内容变化，字体、标题基线和图示规则保持一致。同类节点默认同色，普通内页不添加制作说明页脚；流程页配合具体处理步骤，数据页保留必要字段和约束。这个示例适合工程说明，其他主题应另选或提取适合的视觉身份，不把所有项目都做成同一种科技风。
 
 现有模板或用户参考优先。背景需要插画时，固定材质、光线、主体位置和留白，把文字与数据留在原生层。风格库保存设计规则，不打包用户私有截图和数据。
 

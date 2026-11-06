@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "technical-editorial",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "工程白蓝",
   "bestFor": [
     "软件项目工作汇报",
     "工程答辩",
     "方法与实验说明"
   ],
-  "designIntent": "以真实界面、技术关系和数据证据为主体。统一浅底、深蓝文字和克制的蓝色强调，避免逐页更换视觉语言。",
+  "designIntent": "以真实界面、技术关系和数据证据为主体。同类技术节点使用统一白色填充与边框；用位置、标题和连线表达关系。内容区提供足够解释，不预留制作说明页脚。",
   "fontFamily": "Microsoft YaHei",
   "slideSize": {
     "width": 1280,
@@ -119,23 +119,6 @@
         "top": 0,
         "bottom": 0
       }
-    },
-    "footer": {
-      "fontSize": 18,
-      "color": "#627089",
-      "bold": false,
-      "position": {
-        "left": 64,
-        "top": 667,
-        "width": 1152,
-        "height": 28
-      },
-      "insets": {
-        "left": 0,
-        "right": 0,
-        "top": 0,
-        "bottom": 0
-      }
     }
   },
   "shapeStyles": {
@@ -143,12 +126,6 @@
       "geometry": "rect",
       "fill": "#FFFFFF",
       "lineColor": "#C7D1DF",
-      "lineWidth": 1
-    },
-    "focus": {
-      "geometry": "rect",
-      "fill": "#EAF0FF",
-      "lineColor": "#9BAFEF",
       "lineWidth": 1
     }
   },
@@ -178,15 +155,15 @@
   },
   "layoutRules": {
     "margin": 64,
-    "contentTop": 184,
+    "contentTop": 168,
     "gutter": 32,
     "captionGap": 18,
     "titleMaxLines": 1
   },
   "layouts": {
     "feature": "固定页眉下放一张主截图，旁边仅解释与当前用户任务有关的操作。截图比例保真。",
-    "architecture": "同层节点水平排列，主调用路径居中，事件支路放下方，连接标签靠近对应线段。",
-    "dataModel": "实体在同一基线对齐，PK/FK 与关系基数靠近实体；额外约束放底部说明区。",
+    "architecture": "主调用路径与必要支路配合关键处理步骤，充分解释一次实际操作；同类节点保持相同填充。",
+    "dataModel": "核心实体包含讲解所需的关键字段，关系与约束就近说明；避免空的大框和泛泛的总结。",
     "results": "一个主要结果图配必要口径；完整表格和实现细节放附录。"
   },
   "imageTreatment": {
@@ -197,7 +174,10 @@
     "把所有项目都套成蓝色科技风",
     "同一套内页随意切换深浅底",
     "通过换背景代替信息设计",
-    "把原生图表转换成整页截图"
+    "把原生图表转换成整页截图",
+    "没有明确语义就给某个同类节点单独换填充色",
+    "每页固定左下角制作说明、验证说明或模板套话",
+    "用空框和大面积无用途留白代替必要的流程、数据或解释"
   ],
   "chartPalette": [
     "#3155D9",

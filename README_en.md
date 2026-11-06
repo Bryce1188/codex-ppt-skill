@@ -16,6 +16,8 @@ See the [source workflow](skills/codex-ppt-skill/docs/source-understanding.md).
 
 Extract typography, palette roles, title positions, margins, diagram conventions, table styling and image treatment from suitable references. Save one versioned design-profile.json, reuse it when appropriate, and adapt layouts to the content. A new deck does not require another search for background templates.
 
+The default engineering profile uses the same fill for peer nodes and adds no automatic production footer. Process and data pages include the implementation details needed to explain the evidence.
+
 The builder reads this profile. Text and diagram nodes reference style roles; tables, charts and connectors inherit shared defaults. Unexplained changes in headings, colors or diagram styling fail the source check. Deliberate exceptions are recorded. Rendered review is still required.
 
 ![The same profile applied to a database diagram](assets/showcase/software-report/slide_02.png)
