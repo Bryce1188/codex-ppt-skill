@@ -1,0 +1,2 @@
+# Preserve checksum-verified upstream snapshots byte for byte.
+skills/codex-ppt-skill/references/humanizer/** -text whitespace=cr-at-eol

@@ -1,51 +1,12 @@
-# User-Supplied Assets
+# 用户提供的图表、截图与素材
 
-Read this before using paper figures, experiment result charts, screenshots, logos, or other assets that must appear in the deck.
+先查看用户给的图片，确认它在说明什么。按 [项目视觉证据](project-visual-evidence.md) 记录来源、用途和页号，不重复询问已明确的放置要求。
 
-When the user provides paper figures, experiment result charts, screenshots, logos, or other assets that must appear in the deck, treat them as source assets, not as loose visual inspiration.
+- 精确图表、实验图、运行截图、logo：保存源文件，作为原生图片对象直接嵌入；数据可追溯时才重建为原生图表，并核对数值、单位和坐标。
+- 风格参考、装饰背景：可作为生图参考；读取可用 imagegen 规则，真实传入图片，按实际工具接口编辑。
+- 不能把精确图表送入生成模型再以“请保持不变”替代保真验证。生成式重绘可能改变标签和数值。
+- 图片式页面也必须用确定性合成保留证据原图；或改为 hybrid 页面，文字和图片独立放置。
+- 图片中文字过小，优先放大、拆页或加清楚的局部放大图。不要裁去限定条件、坐标轴或图例。
+- 原文件保留；修改后另存。图注和页备注记录来源、许可或用户提供情况。
 
-Recommended project-local asset location:
-
-```text
-{base_dir}/{deck_name}/assets/
-├── figures/
-│   ├── result_01.png
-│   └── result_02.png
-└── logos/
-    └── lab_logo.png
-```
-
-Do not place source assets in `origin_image/`; that directory is only for final `slide_XX.png` images.
-
-For slides that must include a user-supplied figure:
-
-- Record the exact asset path or attachment name in `outline.md` for that slide, preferably as a Markdown image reference inside that slide's `Required images` list, then ask the user to confirm the mapping before generation.
-- Stay on the already selected image backend. Do not switch between built-in image generation and CLI/API fallback only because a slide includes source images.
-- Use the selected backend's reference-image or edit capability when available, with the supplied figure visible as an input image.
-- In built-in `image_gen` mode, every source image must be visible in the conversation context before generating any slide that depends on it. User attachments and images generated earlier in the thread already qualify. For local image paths, inspect each required image with `view_image` first, then generate or edit the slide.
-- In built-in `image_gen` mode, `view_image` is the required way to make local image paths visible to the conversation before generation. It is not a filename parameter to `image_gen`; the generation prompt must still label the visible image by role, such as `Image 1: strict input asset` or `Image 2: approved sample slide style reference`.
-- Ask the model to preserve the supplied figure's data, labels, axes, colors, and visual content, and only compose the surrounding slide layout, title, captions, callouts, and background.
-- Do not ask the model to "redraw", "recreate", "imagine", or "generate a similar chart" for result figures unless the user explicitly wants a stylized redraw.
-- After generation, inspect the output and ask the user to pay special attention to whether required figures were used correctly.
-
-Example prompt fragment for a result-figure slide:
-
-```json
-{
-  "source_assets": [
-    {
-      "path": "{base_dir}/{deck_name}/assets/figures/result_01.png",
-      "usage": "embed as the main evidence figure",
-      "fidelity": "preserve the figure content; do not redraw or change data, axes, labels, colors, curves, bars, or legends"
-    }
-  ],
-  "visual_elements": {
-    "main_visual": "place the supplied result_01.png as a large figure panel, with a short caption and two callouts around it"
-  },
-  "constraints": [
-    "Use the provided figure as an input image, not as a loose style reference.",
-    "Do not synthesize a replacement chart.",
-    "Keep all numerical values and labels in the supplied figure unchanged."
-  ]
-}
-```
+用户授权重绘时明确标为示意图，不能继续把它当作原始结果证据。

@@ -1,0 +1,133 @@
+{
+  "title": "课程成绩分析工具",
+  "expected_slide_count": 6,
+  "duration_minutes": 5,
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "说明问题、输入与输出",
+      "source": "assignment.md"
+    },
+    {
+      "id": "R2",
+      "text": "解释数据校验、统计和输出流程",
+      "source": "assignment.md"
+    },
+    {
+      "id": "R3",
+      "text": "展示实际计算结果与单位、分段规则",
+      "source": "assignment.md"
+    },
+    {
+      "id": "R4",
+      "text": "说明验证范围、演示数据与不足",
+      "source": "assignment.md"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "claim": "CSV 输入、统计输出；数据为人工构造",
+      "source": "project/README.md",
+      "status": "documented"
+    },
+    {
+      "id": "E2",
+      "claim": "实现分数校验、平均分、及格率与分段统计",
+      "source": "project/analyze_scores.py",
+      "status": "implemented"
+    },
+    {
+      "id": "E3",
+      "claim": "实际执行示例脚本得到统计结果",
+      "source": "project/results.json",
+      "status": "verified"
+    },
+    {
+      "id": "E4",
+      "claim": "定义已知结果、空输入和非法值测试",
+      "source": "project/test_analyze_scores.py",
+      "status": "implemented"
+    },
+    {
+      "id": "E5",
+      "claim": "12 条人工数据；无真实学校接入与界面",
+      "source": "project/README.md",
+      "status": "documented"
+    }
+  ],
+  "slides": [
+    {
+      "number": 1,
+      "title": "课程成绩分析工具",
+      "requirement_ids": [],
+      "evidence_ids": [
+        "E1"
+      ],
+      "gap_notes": []
+    },
+    {
+      "number": 2,
+      "title": "任务与交付",
+      "requirement_ids": [
+        "R1"
+      ],
+      "evidence_ids": [
+        "E1"
+      ],
+      "gap_notes": []
+    },
+    {
+      "number": 3,
+      "title": "读取、校验与统计",
+      "requirement_ids": [
+        "R2"
+      ],
+      "evidence_ids": [
+        "E2"
+      ],
+      "gap_notes": []
+    },
+    {
+      "number": 4,
+      "title": "12 条演示数据的成绩分布",
+      "requirement_ids": [
+        "R3"
+      ],
+      "evidence_ids": [
+        "E3"
+      ],
+      "gap_notes": []
+    },
+    {
+      "number": 5,
+      "title": "输入检查与测试范围",
+      "requirement_ids": [
+        "R2",
+        "R4"
+      ],
+      "evidence_ids": [
+        "E4"
+      ],
+      "gap_notes": []
+    },
+    {
+      "number": 6,
+      "title": "当前范围与后续工作",
+      "requirement_ids": [
+        "R4"
+      ],
+      "evidence_ids": [
+        "E5"
+      ],
+      "gap_notes": [
+        "只在人工构造数据上演示，尚未接入真实学校数据。"
+      ]
+    }
+  ],
+  "background": {
+    "mode": "auto",
+    "selected": "clean-classroom",
+    "candidates": []
+  }
+}

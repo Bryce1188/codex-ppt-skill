@@ -55,6 +55,7 @@ HIGH_SIGNAL_NAMES = {
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp", ".tiff"}
 DOC_EXTS = {".md", ".mdx", ".rst", ".txt", ".ipynb", ".pdf", ".docx", ".pptx"}
+DATA_EXTS = {".csv", ".tsv", ".json", ".jsonl", ".xlsx", ".parquet"}
 CODE_EXTS = {
     ".py",
     ".js",
@@ -236,6 +237,7 @@ def classify_files(files: list[Path], root: Path) -> dict[str, Any]:
         "code_files": [rel(path, root) for path in code[:80]],
         "documentation_files": [rel(path, root) for path in docs[:60]],
         "image_files": [rel(path, root) for path in images[:80]],
+        "data_files": [rel(path, root) for path in files if path.suffix.lower() in DATA_EXTS][:80],
         "high_signal_files": [rel(path, root) for path in high_signal[:80]],
     }
 
@@ -268,6 +270,7 @@ def analyze(root: Path, max_files: int) -> dict[str, Any]:
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "project_root": str(root),
         "project_name": project_name,
+        "scan_limit_reached": len(files) >= max_files,
         "frameworks_and_stack_signals": frameworks,
         "candidate_commands": find_candidate_commands(root, frameworks),
         "package_scripts": extract_package_scripts(root),
@@ -306,6 +309,12 @@ def write_markdown(report: dict[str, Any], out_path: Path) -> None:
     if not files["high_signal_files"]:
         lines.append("- None detected.")
     lines.append("")
+    lines.append("## Data and Result Candidates")
+    for path in files["data_files"]:
+        lines.append(f"- `{path}`")
+    if report["scan_limit_reached"]:
+        lines.append("- Scan limit reached; inspect relevant subdirectories before treating this as complete.")
+    lines.append("")
     lines.append("## Visual Assets")
     for path in files["image_files"][:40]:
         lines.append(f"- `{path}`")
@@ -334,6 +343,8 @@ def main() -> int:
     parser.add_argument("--max-files", type=int, default=2500, help="Maximum files to scan")
     args = parser.parse_args()
 
+    if args.max_files < 1:
+        parser.error("--max-files must be positive")
     root = Path(args.project_root).expanduser().resolve()
     if not root.exists() or not root.is_dir():
         raise SystemExit(f"Project root is not a directory: {root}")

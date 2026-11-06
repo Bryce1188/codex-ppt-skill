@@ -1,0 +1,25 @@
+name: Skill checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Workflow tests
+        run: python -m unittest discover -s skills/codex-ppt-skill/tests -v
+      - name: Example project tests
+        run: python -m unittest discover -s skills/codex-ppt-skill/examples/course-report/project -v
+      - name: Validate example plan
+        run: python skills/codex-ppt-skill/scripts/validate_plan.py skills/codex-ppt-skill/examples/course-report/presentation-plan.json
+      - name: Check bundled Humanizer
+        run: python skills/codex-ppt-skill/scripts/resolve_humanizer.py --bundled
+      - name: Check example source asset
+        run: python skills/codex-ppt-skill/scripts/validate_assets.py skills/codex-ppt-skill/examples/course-report/asset-manifest.json

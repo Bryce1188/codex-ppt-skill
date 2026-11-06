@@ -1,0 +1,603 @@
+{
+  "fontFamily": "Microsoft YaHei",
+  "slideSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "expectedSlideCount": 6,
+  "data": {
+    "distribution": {
+      "categories": [
+        "<60",
+        "60-69",
+        "70-79",
+        "80-89",
+        "90-100"
+      ],
+      "series": [
+        {
+          "name": "人数",
+          "values": [
+            2,
+            2,
+            3,
+            3,
+            2
+          ],
+          "fill": "#087E8B"
+        }
+      ]
+    },
+    "checks": {
+      "values": [
+        [
+          "输入情况",
+          "预期行为"
+        ],
+        [
+          "0、60、100 分",
+          "及格 2 人，平均分 53.33"
+        ],
+        [
+          "没有记录",
+          "拒绝计算"
+        ],
+        [
+          "越界值、NaN、无穷大",
+          "拒绝计算"
+        ]
+      ]
+    }
+  },
+  "slides": [
+    {
+      "background": "#162B3B",
+      "requireEditableText": true,
+      "notes": "这是用人工构造数据制作的课程演示项目。介绍如何从 CSV 读取分数，检查输入并输出可核对的统计结果。",
+      "sources": [
+        "assignment.md",
+        "project/README.md",
+        "AI-generated decorative background: assets/cover-background.png; built-in image_gen, 2026-11-06. Prompt: assets/cover-background-prompt.txt"
+      ],
+      "elements": [
+        {
+          "type": "image",
+          "path": "assets/cover-background.png",
+          "alt": "AI 生成的无文字背景，深蓝底色与右侧青色玻璃及纸张构成装饰，不代表项目结果。",
+          "fit": "cover",
+          "role": "decorative",
+          "position": {
+            "left": 0,
+            "top": 0,
+            "width": 1280,
+            "height": 720
+          }
+        },
+        {
+          "type": "text",
+          "text": "课程成绩\n分析工具",
+          "position": {
+            "left": 72,
+            "top": 142,
+            "width": 1080,
+            "height": 244
+          },
+          "fontSize": 88,
+          "color": "#FFFFFF",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "CSV 校验、统计与结果汇报",
+          "position": {
+            "left": 78,
+            "top": 430,
+            "width": 1080,
+            "height": 65
+          },
+          "fontSize": 34,
+          "color": "#B9D5DC",
+          "bold": false
+        },
+        {
+          "type": "text",
+          "text": "课程演示项目，使用 12 条人工构造数据",
+          "position": {
+            "left": 78,
+            "top": 620,
+            "width": 1100,
+            "height": 42
+          },
+          "fontSize": 23,
+          "color": "#B9D5DC",
+          "bold": false
+        }
+      ]
+    },
+    {
+      "background": "#F8FAFB",
+      "requireEditableText": true,
+      "notes": "任务要求包括问题与输入输出、处理流程、实际统计结果和验证范围。本演示只使用项目已有的 CSV 分析功能。",
+      "sources": [
+        "assignment.md",
+        "project/README.md"
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "任务与交付",
+          "position": {
+            "left": 72,
+            "top": 54,
+            "width": 1136,
+            "height": 80
+          },
+          "fontSize": 48,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "输入",
+          "position": {
+            "left": 72,
+            "top": 202,
+            "width": 480,
+            "height": 70
+          },
+          "fontSize": 42,
+          "color": "#087E8B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "匿名编号与分数\nCSV 格式，0–100 分",
+          "position": {
+            "left": 72,
+            "top": 298,
+            "width": 510,
+            "height": 156
+          },
+          "fontSize": 34,
+          "color": "#162B3B",
+          "bold": false
+        },
+        {
+          "type": "text",
+          "text": "输出",
+          "position": {
+            "left": 692,
+            "top": 202,
+            "width": 500,
+            "height": 70
+          },
+          "fontSize": 42,
+          "color": "#087E8B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "人数、平均分与及格率\n各分数段人数",
+          "position": {
+            "left": 692,
+            "top": 298,
+            "width": 510,
+            "height": 156
+          },
+          "fontSize": 34,
+          "color": "#162B3B",
+          "bold": false
+        },
+        {
+          "type": "text",
+          "text": "及格线为 60 分；未接入真实学校数据。",
+          "position": {
+            "left": 72,
+            "top": 604,
+            "width": 1136,
+            "height": 50
+          },
+          "fontSize": 27,
+          "color": "#5E7180",
+          "bold": false
+        }
+      ]
+    },
+    {
+      "background": "#F8FAFB",
+      "requireEditableText": true,
+      "notes": "源代码中 summarize 函数检查空输入和分数范围，计算平均分、及格率和各分数段人数。合法数据范围为 0 至 100 分。",
+      "sources": [
+        "project/analyze_scores.py"
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "读取、校验与统计",
+          "position": {
+            "left": 72,
+            "top": 54,
+            "width": 1136,
+            "height": 80
+          },
+          "fontSize": 48,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "01",
+          "position": {
+            "left": 72,
+            "top": 202,
+            "width": 110,
+            "height": 64
+          },
+          "fontSize": 44,
+          "color": "#087E8B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "读取 CSV",
+          "position": {
+            "left": 220,
+            "top": 202,
+            "width": 350,
+            "height": 64
+          },
+          "fontSize": 36,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "解析匿名编号与分数列",
+          "position": {
+            "left": 620,
+            "top": 206,
+            "width": 580,
+            "height": 66
+          },
+          "fontSize": 30,
+          "color": "#5E7180",
+          "bold": false
+        },
+        {
+          "type": "text",
+          "text": "02",
+          "position": {
+            "left": 72,
+            "top": 350,
+            "width": 110,
+            "height": 64
+          },
+          "fontSize": 44,
+          "color": "#087E8B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "检查输入",
+          "position": {
+            "left": 220,
+            "top": 350,
+            "width": 350,
+            "height": 64
+          },
+          "fontSize": 36,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "拒绝空输入、越界值与非有限数",
+          "position": {
+            "left": 620,
+            "top": 354,
+            "width": 580,
+            "height": 90
+          },
+          "fontSize": 30,
+          "color": "#5E7180",
+          "bold": false
+        },
+        {
+          "type": "text",
+          "text": "03",
+          "position": {
+            "left": 72,
+            "top": 498,
+            "width": 110,
+            "height": 64
+          },
+          "fontSize": 44,
+          "color": "#087E8B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "输出统计",
+          "position": {
+            "left": 220,
+            "top": 498,
+            "width": 350,
+            "height": 64
+          },
+          "fontSize": 36,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "计算统计量，输出 JSON",
+          "position": {
+            "left": 620,
+            "top": 502,
+            "width": 580,
+            "height": 90
+          },
+          "fontSize": 30,
+          "color": "#5E7180",
+          "bold": false
+        }
+      ]
+    },
+    {
+      "background": "#F8FAFB",
+      "requireEditableText": true,
+      "notes": "图表数值直接取自实际运行 analyze_scores.py 后生成的 results.json：各分段依次为 2、2、3、3、2 人，合计 12 人。分段边界分别是 [0,60)、[60,70)、[70,80)、[80,90)、[90,100]；当前样例分数为整数。",
+      "sources": [
+        "project/scores.csv",
+        "project/results.json"
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "12 条演示数据的成绩分布",
+          "position": {
+            "left": 72,
+            "top": 54,
+            "width": 1136,
+            "height": 80
+          },
+          "fontSize": 48,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "平均分 75 分，及格 10/12 人（83.33%）",
+          "position": {
+            "left": 72,
+            "top": 144,
+            "width": 1136,
+            "height": 52
+          },
+          "fontSize": 30,
+          "color": "#5E7180",
+          "bold": false
+        },
+        {
+          "type": "chart",
+          "chartType": "bar",
+          "dataKey": "distribution",
+          "position": {
+            "left": 92,
+            "top": 226,
+            "width": 1100,
+            "height": 350
+          },
+          "labelSize": 24,
+          "color": "#5E7180",
+          "options": {
+            "barOptions": {
+              "direction": "column",
+              "grouping": "clustered"
+            },
+            "hasLegend": false,
+            "yAxis": {
+              "min": 0,
+              "max": 4,
+              "numberFormatCode": "0"
+            },
+            "xAxis": {
+              "numberFormatCode": "General"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": "横轴：分数段（分）   纵轴：人数（人）。数据均为人工构造。",
+          "position": {
+            "left": 72,
+            "top": 620,
+            "width": 1136,
+            "height": 44
+          },
+          "fontSize": 23,
+          "color": "#5E7180",
+          "bold": false
+        }
+      ],
+      "requireNativeChart": true
+    },
+    {
+      "background": "#F8FAFB",
+      "requireEditableText": true,
+      "notes": "测试文件含三项测试方法，非法分数测试进一步覆盖 -1、101、NaN 与无穷大。这页说明检查范围；示例任务并不包含真实学校环境的验收。",
+      "sources": [
+        "project/test_analyze_scores.py"
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "输入检查与测试范围",
+          "position": {
+            "left": 72,
+            "top": 54,
+            "width": 1136,
+            "height": 80
+          },
+          "fontSize": 48,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "测试覆盖已知统计结果、空输入与非法分数",
+          "position": {
+            "left": 72,
+            "top": 150,
+            "width": 1136,
+            "height": 58
+          },
+          "fontSize": 30,
+          "color": "#5E7180",
+          "bold": false
+        },
+        {
+          "type": "table",
+          "dataKey": "checks",
+          "position": {
+            "left": 72,
+            "top": 252,
+            "width": 1136,
+            "height": 326
+          },
+          "fontSize": 26,
+          "headerFill": "#162B3B",
+          "bodyFill": "#EEF3F5"
+        },
+        {
+          "type": "text",
+          "text": "单元测试不能替代真实数据接入后的验收。",
+          "position": {
+            "left": 72,
+            "top": 620,
+            "width": 1136,
+            "height": 44
+          },
+          "fontSize": 25,
+          "color": "#5E7180",
+          "bold": false
+        }
+      ],
+      "requireNativeTable": true
+    },
+    {
+      "background": "#F8FAFB",
+      "requireEditableText": true,
+      "notes": "只在人工构造数据上演示，尚未接入真实学校数据。当前也没有用户界面、登录和数据库。这些作为后续工作，而不是已完成成果。",
+      "sources": [
+        "project/README.md"
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "当前范围与后续工作",
+          "position": {
+            "left": 72,
+            "top": 54,
+            "width": 1136,
+            "height": 80
+          },
+          "fontSize": 48,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "12 条",
+          "position": {
+            "left": 72,
+            "top": 220,
+            "width": 450,
+            "height": 122
+          },
+          "fontSize": 94,
+          "color": "#087E8B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "人工构造数据",
+          "position": {
+            "left": 78,
+            "top": 370,
+            "width": 440,
+            "height": 80
+          },
+          "fontSize": 36,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "当前能做",
+          "position": {
+            "left": 650,
+            "top": 220,
+            "width": 550,
+            "height": 60
+          },
+          "fontSize": 34,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "读取 CSV，校验分数，\n输出统计结果",
+          "position": {
+            "left": 650,
+            "top": 300,
+            "width": 550,
+            "height": 128
+          },
+          "fontSize": 32,
+          "color": "#162B3B",
+          "bold": false
+        },
+        {
+          "type": "text",
+          "text": "后续需要",
+          "position": {
+            "left": 650,
+            "top": 466,
+            "width": 550,
+            "height": 58
+          },
+          "fontSize": 34,
+          "color": "#162B3B",
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "接入真实数据并补充异常格式、\n大文件和实际使用测试",
+          "position": {
+            "left": 650,
+            "top": 540,
+            "width": 550,
+            "height": 110
+          },
+          "fontSize": 30,
+          "color": "#162B3B",
+          "bold": false
+        },
+        {
+          "type": "text",
+          "text": "结果不能代表真实班级表现。",
+          "position": {
+            "left": 72,
+            "top": 610,
+            "width": 535,
+            "height": 50
+          },
+          "fontSize": 26,
+          "color": "#5E7180",
+          "bold": false
+        }
+      ]
+    }
+  ]
+}

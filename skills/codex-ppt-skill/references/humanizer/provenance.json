@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/Bryce1188/humanizer",
+  "commit": "edaa620aa91abc77acab23d1661e6ef9c6bd8039",
+  "version": "3.1.0",
+  "local_revision": "cn.2",
+  "snapshot_date": "2026-11-06",
+  "entrypoint": "humanizer.md",
+  "note": "Unmodified source bytes; SKILL.md renamed to avoid advertising a second installable skill.",
+  "files": {
+    "humanizer.md": "b11a6f97b5107a821ff8febb08fa535287a27e895c4a46abb1c0a7100e1a2945",
+    "references/chinese-editing.md": "152d8e6e754734a0c5a55020d040fc7be082c21bc32d2824781e67ef52a17709",
+    "LICENSE": "4ac4810254ab36d45419141aeb8e69bf50652cfafe5b2dab947d06d44e5cbf96"
+  }
+}

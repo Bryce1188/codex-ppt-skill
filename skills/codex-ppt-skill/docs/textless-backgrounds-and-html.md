@@ -85,3 +85,7 @@ When creating PPTX:
 - Add text boxes as native editable PPT text.
 - Do not flatten the whole slide to a single screenshot unless the user explicitly asks for image-only slides.
 - If the user wants to add text themselves, provide blank or lightly guided text zones and keep the slide backgrounds textless.
+
+## Executable PPTX route
+
+Use [editable-production.md](editable-production.md) and `scripts/build_editable_deck.mjs` for actual native PPTX text. `create_background_html.py` is only an HTML scaffold: browser edits are not automatically persisted and it does not export PPTX. Do not deliver it as proof of editable PowerPoint output.

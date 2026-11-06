@@ -31,7 +31,9 @@ Capture these facts with file evidence when possible:
 - Treat code as stronger evidence than aspirational README text.
 - Treat screenshots from a running app as stronger evidence than mockups.
 - Do not turn TODOs, commented-out code, or planned roadmap items into completed features.
-- When uncertain, phrase as "supports", "appears to", or "is prepared for" instead of overclaiming.
+- Record evidence as documented, implemented, verified, or missing. A plausible verb is not evidence. State exactly what was read or run and the remaining limit; do not call a planned feature supported.
+- For teacher assignments, use assignment-to-deck.md to map every requested topic to evidence and final slide numbers.
+- Inspect data_files from the scanner for actual CSV/JSON/table results. scan_limit_reached means more files may remain; it is not a full audit.
 
 ## Common Project Types
 

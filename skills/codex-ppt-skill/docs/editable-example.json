@@ -1,0 +1,98 @@
+{
+  "fontFamily": "Microsoft YaHei",
+  "slideSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "expectedSlideCount": 1,
+  "data": {
+    "minutes": {
+      "categories": [
+        "优化前",
+        "优化后"
+      ],
+      "series": [
+        {
+          "name": "分钟",
+          "values": [
+            80,
+            35
+          ],
+          "fill": "#136F63"
+        }
+      ]
+    }
+  },
+  "slides": [
+    {
+      "requireEditableText": true,
+      "requireNativeChart": true,
+      "notes": "演示数据，不代表真实实验。80 降至 35，减少 45 分钟，降幅为 56.25%。",
+      "sources": [
+        "本示例自拟数据"
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "资料整理用时减少 45 分钟",
+          "position": {
+            "left": 72,
+            "top": 54,
+            "width": 1136,
+            "height": 78
+          },
+          "fontSize": 48,
+          "bold": true
+        },
+        {
+          "type": "text",
+          "text": "同一项任务，优化前后用时对比",
+          "position": {
+            "left": 72,
+            "top": 145,
+            "width": 1136,
+            "height": 48
+          },
+          "fontSize": 28
+        },
+        {
+          "type": "chart",
+          "chartType": "bar",
+          "dataKey": "minutes",
+          "position": {
+            "left": 80,
+            "top": 225,
+            "width": 1080,
+            "height": 360
+          },
+          "options": {
+            "barOptions": {
+              "direction": "bar",
+              "grouping": "clustered"
+            },
+            "xAxis": {
+              "numberFormatCode": "0"
+            },
+            "yAxis": {
+              "min": 0,
+              "max": 100,
+              "numberFormatCode": "0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": "演示数据，仅用于展示版式与编辑能力。单位：分钟",
+          "position": {
+            "left": 72,
+            "top": 634,
+            "width": 1136,
+            "height": 40
+          },
+          "fontSize": 21,
+          "color": "#64748B"
+        }
+      ]
+    }
+  ]
+}

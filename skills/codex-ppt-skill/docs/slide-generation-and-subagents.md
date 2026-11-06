@@ -1,20 +1,22 @@
 # Slide Generation And Subagents
 
+Image-only reference. For editable/hybrid slides use editable-production.md. Approval behavior follows workflow-gates-and-progress.md.
+
 Read this before full-deck image generation, preparing slide jobs, dispatching subagents, recording results, or handling blockers.
 
 ## Final Slide Image Generation
 
-Generate one image per slide with the selected image backend. Every final `slide_XX.png` must be produced by the built-in image tool or by `scripts/image_gen.py`; programmatic rendering or hybrid text overlay is not acceptable for slide image creation.
+For wholly generated image slides, generate one image per slide with the selected image backend. If a slide contains an exact screenshot, result figure or logo, use the hybrid route with the original asset as a separate object, or deterministic composition that preserves the source bytes. Do not send evidence through a generative redraw. Record generated backgrounds and composed final slides as different artifacts; never label a programmatic composite as raw image-tool output.
 
-After the outline, visual style, image backend, and sample slide have all been approved, create final downstream artifacts if they do not already exist:
+After planning, backend selection and sample review are complete (and any user-requested confirmation is received), create final downstream artifacts if they do not already exist:
 
 - `deck_spec.json`
 - `prompts/slide_XX.json`
 - `speech.md`
 
-Do not create these final downstream artifacts before outline approval. If the user explicitly asks for pre-approval planning files, use `.draft.` filenames and synchronize them after approval.
+In guided mode, respect the user-requested outline checkpoint. In delivery mode, prepare downstream artifacts after the internal outline is ready; never record internal review as user approval.
 
-`deck_spec.json` must include `sample_generation_method` copied from the approved sample before `prepare_slide_prompts.py` is run. The helper copies that method into each `prompts/slide_XX.json` and into `slide_jobs.json`, so workers can see the exact backend, tool, mode, image context preparation, and output constraints used for the approved sample.
+`deck_spec.json` must include `sample_generation_method` copied from the reviewed sample (do not claim user approval unless received) before `prepare_slide_prompts.py` is run. The helper copies that method into each `prompts/slide_XX.json` and into `slide_jobs.json`, so workers can see the exact backend, tool, mode, image context preparation, and output constraints used for the approved sample.
 
 Before full production, create structured per-slide image jobs. Prefer the bundled deterministic helper:
 
@@ -124,7 +126,7 @@ If preparing prompts manually instead of using `prepare_slide_prompts.py`, still
 
 ## Parallel Slide Generation With Subagents
 
-After the user approves the sample slide and full-deck generation is authorized, slide subagents are mandatory whenever the current runtime can spawn them. Use one subagent per remaining slide image job. Do not generate the remaining deck sequentially merely for convenience. If subagents cannot be spawned, stop at the dispatch step and report a blocker instead of producing a lower-quality sequential deck.
+After sample review and authorization for the deck, use subagents only when delegation is permitted by the host and useful for independent image jobs. Otherwise generate sequentially with the same backend and quality checks. Missing subagents alone is not a blocker.
 
 Use the slide state scripts as the dispatch contract: the main agent spawns workers, then records dispatch and result state. A slide is not considered dispatched or complete until the relevant script records it.
 
@@ -157,7 +159,7 @@ Subagent responsibilities:
 
 Subagents must not edit `outline.md`, `deck_spec.json`, other slide job files, `origin_image/`, `speech.md`, or the final `.pptx`. The parent agent alone records selected outputs and performs final assembly.
 
-Do not continue sequentially after the sample if subagents are part of the confirmed full-generation workflow and cannot be used. Stop and report the blocker, unless the user explicitly changes the requirement.
+If the user explicitly requires parallel execution and the environment cannot provide it, explain that execution limitation. Otherwise sequential completion is supported.
 
 Dispatch loop:
 

@@ -1,175 +1,29 @@
-# Project Assembly And Reporting
+# 组装与交付
 
-Read this before initializing the project directory, writing speaker notes, assembling the PPT, or sending the final report.
+以用户指定输出目录为准；宿主有 work/outputs 约定时遵守它。来源、构建数据、prompt、状态、预览、QA 留在工作目录，最终 PPTX 和有用的预览单独存放。
 
-## Project Directory
+## 可编辑 / 混合
 
-Use this output structure:
+按 [可编辑构建](editable-production.md) 导出 draft，再运行宿主最终检查与 [质量检查](quality-assurance.md)。背景与正文必须是不同对象。编辑要求要在最终文件中核对，不仅看源 HTML。
+
+## 图片式
+
+保留目录与脚本兼容性：`{base_dir}/{deck_name}/origin_image/slide_01.png`，可选 `speech.md`，以及实际运行需要的 `deck_spec.json`、`prompts/`、`slide_jobs.json`、`slide_run_state.json`。
 
 ```text
-{base_dir}/{deck_name}/
-├── origin_image/
-│   ├── slide_01.png
-│   ├── slide_02.png
-│   └── ...
-├── prompts/
-│   ├── slide_01.json
-│   └── ...
-├── slide_jobs.json
-├── slide_run_state.json
-├── deck_spec.json
-├── outline.md
-├── speech.md
-└── {deck_name}.pptx
+python scripts/assemble_ppt.py <base_dir> <deck_name>.pptx --aspect-ratio 16:9
 ```
 
-If the user did not specify a destination, use the current working directory or the directory that contains the source file.
+只读取正式 slide_N 图片，序号从 1 连续递增，不允许重复编号。所有图片存在后才能装配。现有运行状态应无未处理的 pending/dispatched/blocked；内部样页使用普通结果记录，用户确认样页才可标为 accepted。不能把未处理页静默漏掉。
 
-You may initialize the directory structure with:
+图片式素材与画布比例应匹配；不能靠拉伸解决变形。不用强压缩牺牲中文或论文图清晰度，查看组装后最终 PPTX 的渲染。
 
-```bash
-~/.codex-ppt-skill/.venv/bin/python {skill_root}/scripts/assemble_ppt.py {base_dir} {deck_name}.pptx --init
-```
+## 讲稿与来源
 
-## Quality Check And Repair
+用户需要讲稿时，`speech.md` 以 `## Slide N: 标题` 分页，语言跟随演示内容。讲稿解释证据与上下文，不机械复述文字。具体长度由发言时间与内容决定。
 
-Before assembling the PPT, inspect every slide image. Check:
+调研来源写相关页备注，保留日期、单位与条件；影响判断的限制在页内可见。可编辑构建器直接支持每页 `notes` 和 `sources`。
 
-- Text is readable and not garbled.
-- Slide content matches the outline.
-- Title and key points are not truncated.
-- Visual style is consistent across slides.
-- No page number appears unless the user requested one.
-- Important elements do not overlap.
+## 交付
 
-If a slide has severe text or layout issues, regenerate it with a more constrained prompt. If a slide is mostly correct but has a localized issue, use the selected backend's edit capability when available. In CLI/API fallback mode, use `scripts/image_gen.py edit --image {slide_path} --prompt ... --out {new_slide_path}` and replace the final slide only after validating the edited output.
-
-## Speaker Notes
-
-Make sure `outline.md` reflects the final confirmed deck outline. Do not recreate it from scratch here.
-
-Create `speech.md` as presenter notes that a speaker can use directly. Do not write a brief summary of visible slide text. Write in the presentation language; for Chinese decks, speaker notes should be in Chinese.
-
-For each slide, keep the spoken script and presenter cues separate:
-
-- The talk track appears directly under the slide heading, without an extra label. It is the script the presenter can read or closely follow. It should connect the slide to the deck's main story, explain the point the audience should take away, and include a natural transition at the end when useful.
-- `注意点：` is not meant to be read aloud. Use it for emphasis, pacing, visual reading order, caveats, examples, source reminders, or audience interaction prompts.
-
-Separate these two sections with a standalone `---` line, so the presenter can quickly distinguish the readable script from the cue list.
-
-Before writing the slide notes, choose a delivery style based on the deck content, audience, and purpose. The delivery style is not a label added after writing; it should shape the actual talk track, including how direct the claim is, how much background is explained, which examples are used, how quickly the speaker moves, and how transitions are phrased.
-
-Common delivery styles:
-
-- Technical explainer: patient, definition-first, example-driven, with careful visual walkthroughs.
-- Research or paper reading: evidence-led, method/result/limitation oriented, with clear claims about what the audience should learn from each figure.
-- Product or pitch deck: outcome-first, persuasive, focused on user pain, value, proof, and the next action.
-- Training or workshop: step-by-step, checkpoint-driven, with small prompts for audience reflection or practice.
-- Executive report: conclusion-first, concise, focused on decisions, risks, tradeoffs, and recommended actions.
-
-Keep one deck-level delivery style consistent, but adapt the tone by slide role. For example, an opening slide can be more framing-oriented, a dense diagram slide can slow down for explanation, and a closing slide can become more action-oriented.
-
-Length guidance:
-
-- Title, agenda, and section-divider slides can be 1-2 short paragraphs.
-- Normal content slides should usually be 2-5 short paragraphs, or roughly 150-400 Chinese characters for Chinese decks.
-- Dense concept, architecture, data, or paper-explanation slides may need more, but split long material if the audience would lose the thread.
-
-Use basic presentation craft in the talk track:
-
-- Lead with the claim before the details.
-- Explain visuals in the order the audience should look at them.
-- Add examples, contrast, caveats, and "so what" implications instead of rereading the slide.
-- Close with a natural bridge to the next slide when useful.
-
-Write the talk track from the presenter's point of view, facing the audience. Avoid generic AI-style phrasing, canned summaries, and phrases that sound detached from the actual talk. The script should sound like a person explaining this specific deck in the room:
-
-- Use natural first-person or speaker-facing phrasing when appropriate, such as "这里我想强调的是..." or "我们先看左边这个结构...".
-- Ground each paragraph in the current slide's content and the surrounding deck narrative.
-- Prefer concrete explanations, examples, and audience-oriented transitions over broad filler like "本页主要介绍了..." or "综上所述...".
-- Do not mention that the notes were generated, inferred, or prepared by an AI.
-
-Use `注意点：` for short cues such as:
-
-- `重点：` the one or two ideas the presenter must emphasize.
-- `画面引导：` where the audience should look first, second, and last.
-- `节奏：` where to slow down, pause, or ask a question.
-- `补充：` caveats, examples, source details, or context that should stay out of the spoken script unless needed.
-
-Use headings that the assembly script can map back to slide numbers:
-
-```markdown
-## Slide 1: {Title}
-
-{Presenter talk track for slide 1. For Chinese decks, write this in Chinese. Include an optional transition sentence at the end when useful.}
-
----
-
-注意点：
-- 重点：{Key point the presenter should emphasize}
-- 画面引导：{How to guide the audience through the visual}
-- 节奏：{Where to slow down, pause, or ask a question}
-- 补充：{Caveat, example, source detail, or audience takeaway}
-
-## Slide 2: {Title}
-
-{Presenter talk track for slide 2}
-
----
-
-注意点：
-- 重点：{Key point for slide 2}
-```
-
-## Assembly
-
-Before running `scripts/assemble_ppt.py` or the CLI/API fallback scripts, make sure the shared runtime exists. If `~/.codex-ppt-skill/.venv/bin/python` is missing, or if importing script dependencies fails, create or refresh the environment:
-
-```bash
-python3 {skill_root}/scripts/codex_ppt_runtime.py bootstrap
-```
-
-This is an internal setup step for the skill. Do not ask the user to run these commands unless dependency installation fails and user approval or troubleshooting is required.
-
-Run:
-
-```bash
-~/.codex-ppt-skill/.venv/bin/python {skill_root}/scripts/assemble_ppt.py {base_dir} {deck_name}.pptx --aspect-ratio 16:9
-```
-
-Important:
-
-- `{base_dir}` is the parent directory of `{deck_name}/`.
-- `{deck_name}.pptx` must match the project folder name.
-- The script reads images from `{base_dir}/{deck_name}/origin_image/`.
-- The script only reads final images named like `slide_01.png`, `slide_02.png`, etc.; drafts and sample files are ignored.
-- Before running assembly, `slide_jobs.json` should show every generated slide as `recorded` and every approved sample slide as `accepted`. If any slide is `pending`, `dispatched`, or `blocked`, stop and report that state.
-- If `{base_dir}/{deck_name}/speech.md` exists and uses `Slide N` headings, the script writes those notes into the corresponding PPT speaker notes.
-- The script writes `{base_dir}/{deck_name}/{deck_name}.pptx`.
-
-`assemble_ppt.py` supports `16:9` and `4:3`. Use `16:9` unless the user requests otherwise. `image_gen.py` loads `~/.codex-ppt-skill/.env` automatically for `OPENAI_API_KEY`, `OPENAI_BASE_URL`, and `CODEX_PPT_IMAGE_MODEL`. Run `python3 {skill_root}/scripts/codex_ppt_runtime.py doctor --check-api` when troubleshooting API access.
-
-## Final Report
-
-Report:
-
-- Project directory
-- PPT file path
-- Slide image directory
-- `outline.md` path
-- `speech.md` path
-- `slide_jobs.json` path
-- Number of slides
-- Confirm which image backend was used and that every non-sample slide result was recorded with `record_slide_result.py`.
-- Confirm that speaker notes from `speech.md` were written into the PPT, if applicable
-- Any slides that were regenerated, blocked, or still have known limitations
-
-## Prompting Principles
-
-- Keep one global visual style fixed across the deck.
-- Vary slide composition by page role; style consistency does not mean repeating the same layout.
-- Use `layout_blueprints` as candidate patterns, not mandatory templates.
-- Generate one slide per image request.
-- Prefer concrete visual direction over generic words like "beautiful" or "professional".
-- For dense content, split across more slides instead of crowding one slide.
-- Prioritize clarity over decoration.
+给出 PPTX 与有用的预览，说明模式和影响使用的限制，例如“文字和图表可编辑，背景图仍是图片”。只在实际打开目标应用后才说已做应用内测试。中间状态和日志不默认交付。

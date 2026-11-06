@@ -65,8 +65,13 @@ def get_slide_images(ppt_project_dir: str) -> List[str]:
             if ext in image_extensions and slide_name_pattern.match(file):
                 image_files.append(file_path)
 
-    # 按文件名排序
-    image_files.sort()
+    # Sort by numeric slide ID; reject duplicates and gaps so notes stay aligned.
+    image_files.sort(key=lambda p: int(slide_name_pattern.match(os.path.basename(p)).group(1)))
+    numbers = [int(slide_name_pattern.match(os.path.basename(p)).group(1)) for p in image_files]
+    if len(numbers) != len(set(numbers)):
+        raise ValueError("Duplicate slide numbers in origin_image; keep one final image per slide.")
+    if numbers and numbers != list(range(1, len(numbers) + 1)):
+        raise ValueError(f"Slide numbers must be consecutive starting at 1; found {numbers}")
 
     return image_files
 
@@ -229,6 +234,12 @@ def create_presentation(
             print(dependency_hint())
             return False
 
+        if not image_files:
+            raise ValueError("No slide images supplied")
+        missing = [p for p in image_files if not os.path.isfile(p)]
+        if missing:
+            raise FileNotFoundError("Missing required slide images: " + ", ".join(missing))
+
         # 创建演示文稿
         prs = Presentation()
 
@@ -249,9 +260,12 @@ def create_presentation(
         # 添加每一页幻灯片
         temp_files_to_cleanup = []
         for i, image_path in enumerate(image_files, 1):
-            if not os.path.exists(image_path):
-                print(f"警告：图片文件不存在: {image_path}")
-                continue
+            from PIL import Image
+            with Image.open(image_path) as source_image:
+                ratio = source_image.width / source_image.height
+                intended = prs.slide_width / prs.slide_height
+                if abs(ratio / intended - 1) > 0.02:
+                    raise ValueError(f"Image aspect ratio would be distorted: {image_path}. Prepare a matching canvas first.")
 
             # 压缩图片（如果需要）
             compressed_path = compress_image_if_needed(image_path, max_size_mb=2.0)

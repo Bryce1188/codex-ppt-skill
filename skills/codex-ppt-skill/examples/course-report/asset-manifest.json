@@ -1,0 +1,18 @@
+{
+  "slide_count": 6,
+  "assets": [
+    {
+      "id": "cover-background",
+      "path": "assets/cover-background.png",
+      "role": "decoration",
+      "kind": "decoration",
+      "source": "Built-in image_gen; prompt stored beside source image",
+      "caption": "Generated decoration, not project evidence",
+      "sha256": "9819e0f787c54bc029d20145f5c1ad8dcba066b42b0ffea5f98388cd747d5f62",
+      "slides": [
+        1
+      ],
+      "fit": "cover"
+    }
+  ]
+}

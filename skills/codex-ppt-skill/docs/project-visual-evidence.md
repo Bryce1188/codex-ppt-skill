@@ -1,44 +1,47 @@
-# Visual Evidence
+# 项目截图与结果放置
 
-Use visuals as proof that the project exists and works.
+先确定页面要证明什么，再挑素材。截图是证据，不能用生图补齐不存在的功能。
 
-## Preferred Visuals
+## 获取真实素材
 
-Prioritize:
+1. 扫描项目现有 screenshots、figures、outputs、reports 和结果文件，打开候选图核对内容与版本；文件名不是证据。
+2. 没有截图时读 README、运行配置和实际入口。只在环境合理、任务授权范围内启动项目，使用宿主允许的浏览器或计算机工具操作到目标状态再截图。不要运行可能覆盖用户数据的初始化或耗时训练来“补一张图”。
+3. 记录实际 URL/应用、操作步骤、输入数据、时间和捕获工具；隐藏密码、token、无关个人信息。必要的脱敏保留记录，不修改结果内容。
+4. 工具禁用、启动失败或缺登录信息时使用已有真实素材，或标记缺口。不能绕过宿主限制，也不能用示意图冒充截图。
+5. CLI/数据项目不必硬做界面截图：优先原生图表、真实输出或局部代码。若由结果文件排版成图，标注“由结果文件绘制”，不能叫运行界面截图。
 
-1. Real app screenshots captured from local run or deployment.
-2. User-provided project operation photos.
-3. Generated charts, model outputs, dashboards, notebook exports, or terminal logs.
-4. Architecture diagrams derived from actual code structure.
-5. Static assets from the project only when they clarify identity or UI.
+## 放到哪一页
 
-## Capture Rules
+- 总览页：真实首页/主要产物，只证明已观察到的界面。
+- 实现页：来自代码的结构图，注明它不是运行证明。
+- 操作页：输入→操作→输出的关键状态，必要时分两页。
+- 结果页：项目输出、原始实验图、可追溯数据图。大图优先，避免一页塞满难以辨认的缩略图。
+- 局限页：已知缺口和失败条件，不能用模糊图片遮掩。
 
-- Save screenshots with descriptive names such as `01-home-screen.png`, `02-upload-flow.png`, `03-result-dashboard.png`.
-- Capture complete UI states, not cropped fragments, unless the slide is about a specific detail.
-- Include at least one "hero proof" screenshot for the title or overview section when the project is visual.
-- For dark terminal or log screenshots, crop to the meaningful command/output and increase legibility in the deck.
-- Avoid using decorative stock images unless the user explicitly asks for a conceptual style.
+原生图片层使用 `contain`，保持比例和完整坐标/标签。放大局部时保留总览并说明裁切位置。背景与证据分层；如走整页图片路线，应使用确定性排版工具合成原图，不能依赖生图模型重画。
 
-## Asset Map
+## 素材清单与检查
 
-Before generating slides, create an asset map:
-
-```text
-path | what it shows | slide candidate | evidence strength | notes
+工作目录保存 `asset-manifest.json`：
+```json
+{
+  "slide_count": 6,
+  "assets": [{
+    "id": "result-screen",
+    "path": "assets/result.png",
+    "role": "evidence",
+    "kind": "screenshot",
+    "source": "本地应用的统计结果页",
+    "capture": "实际地址、操作步骤、输入、时间与工具",
+    "sha256": "实际源文件的64位SHA256",
+    "slides": [4],
+    "fit": "contain",
+    "caption": "说明当前截图显示的状态"
+  }]
+}
 ```
+示例字段是格式说明，不能直接当事实。path 相对清单目录；kind 可为 screenshot、source_figure、rendered_result、decoration。role 为 evidence 或 decoration。复制到最终素材路径后计算散列，脱敏或裁切版本应另存并记录来源关系。
 
-Evidence strength:
+运行 `python scripts/validate_assets.py asset-manifest.json --pptx final.pptx`，检查源图散列、页号、原生图片关系和对应页的媒体字节。验证器要求完全相同的图片字节；后端转码导致失败时应保留源图或明确记录并人工复核，不能改散列冒充原图。通过只证明该页引用了原图，不证明内容真实、可见或位置正确，仍需查看最终渲染。
 
-- `strong`: live screenshot, real output, measured result, or user-supplied project photo.
-- `medium`: code-derived diagram, static project asset, documented feature.
-- `weak`: placeholder, mockup, conceptual image, inferred visual.
-
-## Missing Screenshots
-
-If runtime screenshots are absent:
-
-- Try to find the run command from project manifests.
-- Start the app only when dependencies and environment are reasonable.
-- If execution fails, capture the error only if it helps explain setup status.
-- Use architecture and workflow diagrams to compensate, while explicitly noting that runtime screenshots were unavailable.
+没有证据素材就写清缺口；不能用空清单声称完成截图检查。

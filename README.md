@@ -1,172 +1,140 @@
 # Codex PPT Skill
 
-一个面向 Codex 的 PPT 生成 skill。它基于 `ningzimu/codex-ppt-skill` 的图片式 PPT 生产流程，并加入了更适合中文项目展示和资料调研的本地增强：
+**把老师的要求和你做好的项目，整理成一份能讲清楚、能继续修改的 PPT。**
 
-![Codex PPT Skill 效果预览](assets/showcase/slides_example.png)
+[English](README_en.md) · [复制启动提示词](skills/codex-ppt-skill/prompts/start-here.md) · [完整示例](skills/codex-ppt-skill/examples/course-report/README.md) · [调研依据](skills/codex-ppt-skill/docs/research-provenance.md)
 
-- 一句话主题识别：例如“生成某某画展 PPT”，会先判断这是主题/展览/活动型任务，而不是本地项目。
-- 联网资料调研：对画展、人物、品牌、地点、活动、公司、新闻、趋势等公开主题，先搜索官方和可靠来源，再生成大纲和 PPT。
-- 项目证据扫描：对代码项目，读取 README、配置、源码、截图、输出结果和可能的运行命令，先生成证据清单，再写项目汇报。
-- 无文字背景图：可以用 image2/imagegen 生成没有文字的背景图，再把文字放到 HTML 或 PPT 独立文字层，方便后期自己修改。
-- 图片式 PPT 流程：先确认大纲、风格、图片后端和样张，再生成整套幻灯片图片并组装成 PPTX。
+不需要先学 PPT prompt。给 Codex 任务书、项目和汇报目的，它会读取材料，补问关键缺项，安排内容、真实结果和背景，再检查最终 PPTX。
 
-## 效果展示
+![课程项目汇报封面：无文字背景叠加可编辑标题](assets/showcase/course-report/slide_01.png)
 
-下面是一组偏“高端科技演示风”的示例页面，用来展示这个 skill 可以生成的 PPT 观感。
+## 从这一句开始
 
-| 多模式生成 | 画展调研 | 项目汇报 |
+```text
+用 $codex-ppt-skill，根据老师的要求和我的项目做一份可编辑 PPT。
+用途是课程汇报，大约讲 5 分钟。先读材料，缺什么再问我。
+自动整理内容、真实截图和背景，应用 Humanizer，最后检查并交付。
+任务书：[附件或路径]
+项目：[项目路径]
+```
+
+也可以只给主题、论文、报告或已有 PPT。想先选背景，加一句“给我几种真实样页，选好再做”；想快速出稿，加一句“普通设计细节你决定”。
+
+## 它会替你完成什么
+
+| 你提供 | Skill 的工作 |
+| --- | --- |
+| 老师任务书、评分标准 | 提取必讲项，建立要求、证据和页号的对应，标出缺口 |
+| 完成的代码、报告、数据 | 阅读实现与结果，区分计划、已实现、已运行和实测结论 |
+| 模糊的一句话 | 先提取已知信息，结合可用的 Superpowers 补问影响结果的细节 |
+| 项目截图或可运行项目 | 寻找真实素材；工具和环境允许时捕获界面，按页面用途嵌入并核对原图 |
+| 背景偏好或参考图 | 自动选风格、展示候选样页，或使用你提供的背景；支持局部修改 |
+| 草稿和技术说明 | 自动读取 Humanizer，润色标题、正文、图注和讲稿，保留事实与限制 |
+
+默认用原生文字、图表和表格。生图用于无文字背景和装饰；结果截图作为独立图片保留。用户明确选择时，也支持整页图片或现有模板路线。
+
+## 看实际输出
+
+下面六页来自随仓库提供的[可复现示例](skills/codex-ppt-skill/examples/course-report/README.md)，由最终 PPTX 导入后渲染。任务书为虚构示例，12 条成绩为人工构造；统计由代码实际计算。页面采用不同的信息结构，不要求每页都套相同卡片。
+
+| 任务与交付 | 实现过程 |
+| --- | --- |
+| ![输入和输出](assets/showcase/course-report/slide_02.png) | ![读取、校验和统计](assets/showcase/course-report/slide_03.png) |
+
+| 原生数据图表 | 原生检查表格 |
+| --- | --- |
+| ![成绩分布](assets/showcase/course-report/slide_04.png) | ![检查范围](assets/showcase/course-report/slide_05.png) |
+
+![实际范围与后续工作](assets/showcase/course-report/slide_06.png)
+
+### 同一份内容，先看风格再选
+
+| 清爽浅色 | 暖色纸面 | 深色演示 |
 | --- | --- | --- |
-| ![多模式生成](assets/showcase/slide_01.png) | ![画展调研](assets/showcase/slide_03.png) | ![项目汇报](assets/showcase/slide_04.png) |
+| ![浅色样页](assets/showcase/styles/clean.png) | ![暖色样页](assets/showcase/styles/warm.png) | ![深色样页](assets/showcase/styles/dark.png) |
 
-| 无文字背景 | 稳定流程 | 输出结构 |
-| --- | --- | --- |
-| ![无文字背景](assets/showcase/slide_06.png) | ![稳定流程](assets/showcase/slide_07.png) | ![输出结构](assets/showcase/slide_10.png) |
+这是同一页数据的实际渲染，便于比较可读性。选择模式会等待你的答复；自动模式自行检查后继续。
 
-## 适合什么场景
+## 全流程怎样衔接
 
-- 课程展示、项目答辩、毕业设计、比赛路演。
-- 从一个代码仓库自动总结项目内容和亮点。
-- 从一句话主题生成资料型 PPT，例如画展介绍、人物介绍、品牌发布会、旅行分享。
-- 从文章、报告、论文、笔记、大纲生成视觉统一的演示文稿。
-- 生成无文字背景图，让用户自己在 PPT 或 HTML 中加文字。
+```text
+要求 / 目的 / 项目
+      ↓
+读取材料 → 按需补问 → 制作简报
+      ↓
+要求与证据对应 → 每页主信息 → Humanizer 内容轮
+      ↓
+真实截图与图表 → 背景或样页选择 → 原生 PPTX
+      ↓
+对象、数据与原图检查 → 最终文件逐页渲染 → Humanizer 最终轮
+      ↓
+交付 PPTX 和预览 → 按指定页面修改
+```
+
+**Superpowers 负责流程。** 自动寻找本机完整包或拆分子技能，实际读取需求澄清、计划和验证规则。没有安装时使用内置简化流程，不影响基本制作；它不是生图或排版引擎，也不假定每台 Codex 都自带它。
+
+**Humanizer 负责文字。** 优先使用同级或已安装的 [Bryce1188/humanizer](https://github.com/Bryce1188/humanizer)。公开安装另带有校验值的固定快照，不依赖作者电脑路径。两轮处理都要求实际阅读规则并编辑内容。
+
+**截图与数据负责证明结果。** 生成背景不重画实验图或运行界面。素材清单记录来源、页号和散列，检查最终 PPTX 是否在指定页引用原图。运行环境不可用时标出缺口，不生成假截图。
+
+## 背景怎么改
+
+- **自动选：** 按项目内容、受众和页面信息量选择主题；数据页优先保持清楚。
+- **让我选：** 用同一份内容生成 2–3 个候选，至少包含一张内容页。
+- **用我的：** 复用背景、参考图或 PPT 模板，先看实际页面。
+- **只改一点：** “第 3 页背景变浅，保留文字、截图和数据”，只修改受影响部分。
+
+[背景提示词](skills/codex-ppt-skill/prompts/background-design.md) 把主体、构图、留白、颜色、材质和修改范围分别写清。生成图片可以替换或重生成；要在 PowerPoint 里逐个修改背景形状，请明确要求原生形状或可编辑矢量。
+
+| 路线 | 文字 | 图表/表格 | 背景 |
+| --- | --- | --- | --- |
+| editable，默认 | 原生可编辑 | 原生可编辑 | 原生底色/形状，图片可替换 |
+| hybrid | 原生可编辑 | 原生可编辑 | 无文字图片，可替换或重生成 |
+| image | 烘焙在整页图中 | 烘焙在整页图中 | 整页图片 |
+| template | 取决于模板对象 | 取决于模板对象 | 尽量沿用真实模板结构 |
+
+## 怎么减少模板感
+
+内置[问题与修复表](skills/codex-ppt-skill/docs/ai-ppt-repair.md)：空泛文案换成项目事实；结果页用证据说明发现；堆字先精简或拆页；重复卡片按内容改版；背景抢内容就减少细节；图表核对数据；小修改保留其他页面。
+
+这些规则改善表达和阅读，不承诺“完全不像 AI”或通过检测器。
 
 ## 安装
 
-推荐让 Codex 直接安装这个 GitHub 仓库：
+把这句话发给 Codex：
 
 ```text
-请帮我安装这个 Codex skill：https://github.com/Bryce1188/codx-ppt-skill ，skill 名称是 codex-ppt-skill
+请安装 https://github.com/Bryce1188/codex-ppt-skill 中的
+skills/codex-ppt-skill，skill 名称为 codex-ppt-skill。
 ```
 
-也可以手动安装到 Codex skills 目录：
+手动安装：下载仓库，将 `skills/codex-ppt-skill` 整个目录放入你的 Codex skills 目录，例如 `~/.codex/skills/codex-ppt-skill`。不要把整个仓库根目录当成 skill 入口。按当前 Codex 客户端的加载方式刷新会话。
+
+### 运行需要什么
+
+- 支持本地 skills、文件读取和脚本的 Codex 环境。
+- Python 3.10+：扫描、定位器、计划与素材验证使用标准库。
+- 原生 PPTX：优先用宿主 presentations 工具。附带构建器需要 Node.js 和宿主提供的 `@oai/artifact-tool`；普通 npm 环境不保证具备这个依赖。
+- AI 背景：需要可用的生图工具。没有时使用已有素材或原生简洁排版。
+- 自动截图：需要允许访问项目的浏览器/计算机工具，以及可运行项目。
+- Superpowers 是可选增强；Humanizer 固定快照已随包提供，无需额外安装才能用文字规则。
+
+Skill 提供制作流程与辅助脚本，不是自带云端模型、浏览器和 PowerPoint 的独立程序。不擅自安装插件或切换收费服务。
+
+## 验证与复现
 
 ```bash
-npx -y skills@latest add Bryce1188/codx-ppt-skill \
-  --skill codex-ppt-skill \
-  --agent codex \
-  --global
+python -m unittest discover -s skills/codex-ppt-skill/tests -v
+python skills/codex-ppt-skill/scripts/validate_plan.py skills/codex-ppt-skill/examples/course-report/presentation-plan.json
+python skills/codex-ppt-skill/scripts/resolve_humanizer.py --bundled
 ```
 
-本地开发时，可以把仓库里的 skill 文件夹链接到 Codex：
+目前包含 23 项流程检查和示例项目的 3 项测试。六页示例已检查原生文字、图表、表格、备注、包结构，并从最终 PPTX 渲染逐页查看。原图嵌入已用最终文件核对。此次环境禁用了浏览器，**未实测自动启动网页并截图**；也未在桌面 PowerPoint 中验证全部编辑操作。详细范围见[示例验证记录](skills/codex-ppt-skill/examples/course-report/verification.md)。
 
-```bash
-mkdir -p ~/.codex/skills
-ln -s /path/to/codx-ppt-skill/skills/codex-ppt-skill ~/.codex/skills/codex-ppt-skill
-```
+GitHub CI 只运行不依赖宿主的检查，不把 CI 通过写成视觉质量保证。生成的 PPTX、工作目录和日志不提交到仓库。
 
-Windows 示例：
+## 来源与许可
 
-```powershell
-New-Item -ItemType Junction `
-  -Path "$env:USERPROFILE\.codex\skills\codex-ppt-skill" `
-  -Target "D:\obsidian知识库\Skill文件\codex-ppt-skill"
-```
+基于 [ningzimu/codex-ppt-skill](https://github.com/ningzimu/codex-ppt-skill) 的 MIT 图片制作路线，保留[原始版权与许可证](skills/codex-ppt-skill/LICENSE)。本版补充任务到证据的流程、可编辑制作、Humanizer、Superpowers 接入、提示词和验证示例。
 
-## 使用示例
-
-### 生成画展 PPT
-
-```text
-用 $codex-ppt-skill 生成一个莫奈画展介绍 PPT，8 页，中文，先联网查官方资料和可靠介绍，图片不要编造来源。
-```
-
-### 生成项目汇报 PPT
-
-```text
-用 $codex-ppt-skill 分析当前项目，结合运行截图，生成一个 10 页中文项目答辩 PPT。
-```
-
-### 生成无文字背景，方便后期加字
-
-```text
-用 $codex-ppt-skill 做一个项目展示 PPT，背景图用 image2 生成，但图片里不要出现文字，用 HTML/PPT 独立文字层方便我自己改。
-```
-
-### 从文章或报告生成 PPT
-
-```text
-用 $codex-ppt-skill 把这篇报告做成 12 页演示文稿，风格清爽专业，保留关键数据和来源。
-```
-
-## 工作模式
-
-### 1. 默认图片式 PPT
-
-每页生成一张完整 16:9 幻灯片图片，最后用脚本组装成 PPTX。适合追求视觉统一和强展示效果的场景。
-
-### 2. 主题/画展/活动联网调研
-
-当用户只给一句话主题时，skill 会先判断任务不是本地项目，而是主题型任务。它会搜索官方来源、主办方页面、博物馆/画廊页面、权威媒体和资料库，核验时间、地点、人物、展品、背景、图片来源等信息，再生成 PPT。
-
-### 3. 项目汇报
-
-当输入是项目目录或代码仓库时，skill 会运行 `scripts/analyze_project.py`，生成项目证据清单，并基于真实代码、README、截图、输出结果、测试和运行命令组织 PPT。
-
-### 4. 无文字背景 + 可编辑文字层
-
-当用户希望后期自己加字时，skill 会要求背景图 prompt 禁止文字、字母、数字、logo、水印和签名。文字用 HTML 或 PPT 文本框叠加，避免被烘焙进图片里。
-
-## 输出结构
-
-典型生成目录：
-
-```text
-{输出目录}/{PPT名称}/
-├─ origin_image/
-│  ├─ slide_01.png
-│  ├─ slide_02.png
-│  └─ ...
-├─ prompts/
-│  ├─ slide_01.json
-│  └─ ...
-├─ outline.md
-├─ speech.md
-├─ deck_spec.json
-├─ slide_jobs.json
-├─ slide_run_state.json
-└─ {PPT名称}.pptx
-```
-
-其中 `speech.md` 会作为演讲备注写入 PPT。
-
-## 主要文件
-
-```text
-skills/codex-ppt-skill/
-├─ SKILL.md
-├─ docs/
-│  ├─ topic-web-research.md
-│  ├─ project-report-audit.md
-│  ├─ project-visual-evidence.md
-│  └─ textless-backgrounds-and-html.md
-├─ scripts/
-│  ├─ assemble_ppt.py
-│  ├─ image_gen.py
-│  ├─ analyze_project.py
-│  └─ create_background_html.py
-├─ references/
-└─ prompts/
-```
-
-## 配置说明
-
-在 Codex 中优先使用内置图片生成/编辑工具。只有内置后端不可用、缺少能力，或用户明确要求 API/CLI 模式时，才使用 `scripts/image_gen.py`。
-
-API/CLI fallback 支持这些环境变量：
-
-```text
-OPENAI_API_KEY
-OPENAI_BASE_URL
-CODEX_PPT_IMAGE_MODEL
-CODEX_PPT_HOME
-```
-
-不要把 API key 写入仓库。
-
-## 来源与致谢
-
-主体 PPT 生成流程来自 [ningzimu/codex-ppt-skill](https://github.com/ningzimu/codex-ppt-skill)，遵循 MIT License。本仓库在此基础上加入了中文化说明、主题联网调研、项目证据扫描和无文字背景 HTML 工作流。
-
-## License
-
-MIT
+Humanizer 快照保留[独立许可证](skills/codex-ppt-skill/references/humanizer/LICENSE)与[来源记录](skills/codex-ppt-skill/references/humanizer/provenance.json)。公开方案的参考点与取舍见[调研记录](skills/codex-ppt-skill/docs/research-provenance.md)；未打包第三方受限模板。
