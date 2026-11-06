@@ -1,12 +1,14 @@
 # Codex PPT Skill
 
-**把老师的要求和你做好的项目，整理成一份能讲清楚、能继续修改的 PPT。**
+**把项目代码、真实界面和任务要求，做成适合工作汇报与答辩的可编辑 PPT。**
 
 [English](README_en.md) · [复制启动提示词](skills/codex-ppt-skill/prompts/start-here.md) · [完整示例](skills/codex-ppt-skill/examples/course-report/README.md) · [调研依据](skills/codex-ppt-skill/docs/research-provenance.md)
 
 不需要先学 PPT prompt。给 Codex 任务书、项目和汇报目的，它会读取材料，补问关键缺项，安排内容、真实结果和背景，再检查最终 PPTX。
 
-![课程项目汇报封面：无文字背景叠加可编辑标题](assets/showcase/course-report/slide_01.png)
+![软件项目架构页：原生节点与附着连接线](assets/showcase/software-report/slide_01.png)
+
+上图是虚构仓储方案的设计演示，可修改文字、节点与连接线。[查看示例与复现方式](skills/codex-ppt-skill/examples/software-report/README.md)。
 
 ## 从这一句开始
 
@@ -31,9 +33,23 @@
 | 背景偏好或参考图 | 自动选风格、展示候选样页，或使用你提供的背景；支持局部修改 |
 | 草稿和技术说明 | 自动读取 Humanizer，润色标题、正文、图注和讲稿，保留事实与限制 |
 
-默认用原生文字、图表和表格。生图用于无文字背景和装饰；结果截图作为独立图片保留。用户明确选择时，也支持整页图片或现有模板路线。
+默认用原生文字、图表、表格，以及可编辑技术图示。生图用于无文字背景和装饰；结果截图作为独立图片保留。用户明确选择时，也支持整页图片或现有模板路线。
 
-## 看实际输出
+## 软件项目汇报怎么做
+
+先核对当前代码、数据库约束和已有文档，再试做代表页：
+
+- **功能页：** 用大截图讲一个具体操作，标明演示数据或实测状态。
+- **架构页：** 保留主要请求路径和必要支路，说明职责、技术与调用方向。
+- **数据库页：** 选取业务核心表，展示主外键、关系基数和关键约束；完整模型可放附录。
+
+![仓储核心表关系：可编辑字段与连接线](assets/showcase/software-report/slide_02.png)
+
+这两页来自独立构造的[仓储设计示例](skills/codex-ppt-skill/examples/software-report/README.md)，不含用户项目文件或截图，也不代表已经实现的仓储系统。真实项目会从源码、SQL 和运行界面重新取证，不能直接套用示例技术栈。
+
+内页按内容改变构图，背景保持低干扰。字体和配色统一，截图、架构、数据关系各有适合的布局。[查看完整规则](skills/codex-ppt-skill/docs/software-project-report.md)。
+
+## 课程数据汇报示例
 
 下面六页来自随仓库提供的[可复现示例](skills/codex-ppt-skill/examples/course-report/README.md)，由最终 PPTX 导入后渲染。任务书为虚构示例，12 条成绩为人工构造；统计由代码实际计算。页面采用不同的信息结构，不要求每页都套相同卡片。
 
@@ -47,13 +63,13 @@
 
 ![实际范围与后续工作](assets/showcase/course-report/slide_06.png)
 
-### 同一份内容，先看风格再选
+### 同一份内容的配色示例
 
 | 清爽浅色 | 暖色纸面 | 深色演示 |
 | --- | --- | --- |
 | ![浅色样页](assets/showcase/styles/clean.png) | ![暖色样页](assets/showcase/styles/warm.png) | ![深色样页](assets/showcase/styles/dark.png) |
 
-这是同一页数据的实际渲染，便于比较可读性。选择模式会等待你的答复；自动模式自行检查后继续。
+这三张只比较配色，不代表三种完整设计方向。为实际项目提供风格候选时，还会调整构图、图片占比或文字层级。选择模式等待你的答复；自动模式检查后继续。
 
 ## 全流程怎样衔接
 

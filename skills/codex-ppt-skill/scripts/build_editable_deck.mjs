@@ -31,17 +31,26 @@ export async function buildDeck(spec, { specDir = '.', moduleRoot } = {}) {
   for (const [index, page] of spec.slides.entries()) {
     const slide = presentation.slides.add();
     slide.background.fill = page.background ?? '#FFFFFF';
-    const summary = { slide: index + 1, texts: 0, charts: 0, tables: 0, images: 0 };
+    const summary = { slide: index + 1, texts: 0, charts: 0, tables: 0, images: 0, diagramShapes: 0, connectors: 0 };
+    const diagramNodes = new Map();
     const elements = page.elements ?? [];
     check(elements.length, `Slide ${index + 1}: empty page`);
     for (const [ei, el] of elements.entries()) {
       const label = `Slide ${index + 1}, element ${ei + 1}`;
       const position = box(el.position, canvas, label);
-      if (el.type === 'text') {
+      if (el.type === 'shape') {
+        check(typeof el.id === 'string' && el.id && !diagramNodes.has(el.id), `${label}: unique diagram shape id required`);
+        check(['rect', 'roundRect', 'ellipse'].includes(el.geometry ?? 'rect'), `${label}: unsupported diagram geometry`);
+        const node = slide.shapes.add({ geometry: el.geometry ?? 'rect', name: el.id, position,
+          fill: el.fill ?? 'none', line: { fill: el.lineColor ?? '#334155', width: el.lineWidth ?? 1, style: el.lineStyle ?? 'solid' } });
+        diagramNodes.set(el.id, node);
+        summary.diagramShapes++;
+      } else if (el.type === 'text') {
         const value = el.textKey ? spec.copy?.[el.textKey] : el.text;
         check(typeof value === 'string' && value.trim(), `${label}: nonempty text or valid textKey required`);
         const shape = slide.shapes.add({ geometry: 'textbox', name: el.id ?? `text-${ei + 1}`, position, fill: 'none', line: { fill: 'none', width: 0 } });
         shape.text = value;
+        if (el.insets !== undefined) shape.text.insets = el.insets;
         shape.text.style = { typeface: spec.fontFamily, fontSize: el.fontSize ?? 28, color: el.color ?? '#152536', bold: el.bold ?? false, alignment: el.align ?? 'left', autoFit: 'none', ...el.textStyle };
         summary.texts++;
       } else if (el.type === 'chart') {
@@ -66,10 +75,12 @@ export async function buildDeck(spec, { specDir = '.', moduleRoot } = {}) {
         const values = data?.values;
         check(Array.isArray(values) && values.length && Array.isArray(values[0]) && values[0].length && values.every(r => Array.isArray(r) && r.length === values[0].length), `${label}: table dataKey must resolve to a rectangular values matrix`);
         const table = slide.tables.add({ rows: values.length, columns: values[0].length, ...position, values, ...(el.columnWidths ? { columnWidths: el.columnWidths } : {}) });
+        if (el.borderColor !== undefined) table.borders.assign({ fill: el.borderColor, width: el.borderWidth ?? 1, style: 'solid' });
+        if (el.cellPadding !== undefined) table.cells.block({ row: 0, column: 0, rowCount: values.length, columnCount: values[0].length }).assign({ margins: el.cellPadding });
         for (let r = 0; r < values.length; r++) for (let c = 0; c < values[0].length; c++) {
           const cell = table.getCell(r, c);
           cell.fill = r === 0 ? (el.headerFill ?? '#152536') : (el.bodyFill ?? '#F3F6F8');
-          cell.text.style = { typeface: spec.fontFamily, fontSize: el.fontSize ?? 26, color: r === 0 ? '#FFFFFF' : '#152536', bold: r === 0 };
+          cell.text.style = { typeface: spec.fontFamily, fontSize: el.fontSize ?? 26, color: r === 0 ? (el.headerColor ?? '#FFFFFF') : (el.bodyColor ?? '#152536'), bold: r === 0 };
         }
         summary.tables++;
       } else if (el.type === 'image') {
@@ -82,6 +93,20 @@ export async function buildDeck(spec, { specDir = '.', moduleRoot } = {}) {
         slide.images.add({ blob: new Uint8Array(await fs.readFile(filename)), contentType: mime, alt: el.alt, fit: el.fit ?? 'contain', position });
         summary.images++;
       } else throw new Error(`${label}: unsupported type ${el.type}`);
+    }
+    for (const link of page.connectors ?? []) {
+      check(diagramNodes.has(link.from) && diagramNodes.has(link.to), `Slide ${index + 1}: connector endpoint not found`);
+      check(link.from !== link.to, `Slide ${index + 1}: self connectors are not supported`);
+      const sides = ['left','right','top','bottom'];
+      check(sides.includes(link.fromSide) && sides.includes(link.toSide), `Slide ${index + 1}: connector sides required`);
+      check(['straight','elbow'].includes(link.kind ?? 'straight'), `Slide ${index + 1}: unsupported connector kind`);
+      slide.shapes.connect(diagramNodes.get(link.from), diagramNodes.get(link.to), {
+        kind: link.kind ?? 'straight', fromSide: link.fromSide, toSide: link.toSide,
+        line: { fill: link.color ?? '#334155', width: link.width ?? 2, style: link.style ?? 'solid' },
+        head: { type: 'none' },
+        tail: { type: link.arrow === false ? 'none' : 'arrow', width: 'med', length: 'med' },
+      });
+      summary.connectors++;
     }
     if (page.requireEditableText) check(summary.texts > 0, `Slide ${index + 1}: editable text required`);
     if (page.requireNativeChart) check(summary.charts > 0, `Slide ${index + 1}: native chart required`);

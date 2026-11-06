@@ -36,3 +36,17 @@ Humanizer 来自 [Bryce1188/humanizer](https://github.com/Bryce1188/humanizer)�
 本机 Superpowers 核对版本为 v6.3.0（commit b36e0829c6d0140e93cfef2ca599b1b07d4a7797）。公开安装可能不同，定位器返回实际路径与散列；未自动升级或打包其实现。
 
 “减少 AI 味”指减少套话、重复布局、无依据的拔高和不真实的素材；不声称可以判定作者身份或保证绕过检测。
+
+## 软件汇报与视觉结构
+
+2026-11-06 阅读并提取方法，未复制参考图片或商业模板：
+
+| 来源 | 应用 |
+| --- | --- |
+| [C4 容器图](https://c4model.com/diagrams/container) 与 [检查表](https://c4model.com/diagrams/checklist) | 架构节点有职责、技术与清晰通信方向；不把进程和逻辑模块混成部署图 |
+| [draw.io ER 图](https://www.drawio.com/docs/diagram-types/entity-relationship-tables/) | 保留实体、PK/FK 与基数；根据真实约束简化核心关系 |
+| [Studio Standard 作品](https://studiostandard.com/products/cd-suite-creative-director-profile) | 学习主体图占比、字级对比和非对称构图，不使用其付费模板 |
+| [Pitch AI Native](https://pitch.com/templates/AI-Native-Pitch-Deck-3Stf194ZKoz54Z8eaa2NgwYv) | 根据内容改变页面结构，以实际内页比较效果 |
+| [Duarte 演示设计](https://www.duarte.com/training/presentation-design-training/) | 视觉组织服务于演讲中的主要信息 |
+
+落地规则见 [软件项目汇报](software-project-report.md)。本次试做区分真实界面演示与后端实测，并在最终导出中发现、修复了连接线方向问题。公开示例为独立构造的仓储方案，不含用户项目截图或个人信息。

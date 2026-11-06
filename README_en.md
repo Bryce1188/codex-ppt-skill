@@ -6,7 +6,7 @@
 
 Give Codex your brief, project files and presentation goal. The skill reads the material, asks for consequential missing details, maps requirements to evidence, builds the slides and checks the final PPTX.
 
-![Editable cover over a textless generated background](assets/showcase/course-report/slide_01.png)
+![Editable software architecture example](assets/showcase/software-report/slide_01.png)
 
 ## Start with an ordinary request
 
@@ -99,3 +99,13 @@ CI covers checks that do not require the host presentation runtime. It does not 
 Based on [ningzimu/codex-ppt-skill](https://github.com/ningzimu/codex-ppt-skill), retaining its [MIT license](skills/codex-ppt-skill/LICENSE). This edition adds assignment/evidence mapping, native editable production, process integrations, prompts and validation examples.
 
 The [Humanizer snapshot](skills/codex-ppt-skill/references/humanizer/provenance.json) retains its own [license](skills/codex-ppt-skill/references/humanizer/LICENSE). See [research notes](skills/codex-ppt-skill/docs/research-provenance.md) for sources and design decisions. Restricted third-party templates are not included.
+
+## Software project reports
+
+Use real UI captures for feature pages, native nodes and attached connectors for architecture, and a focused subset of database entities for data design. Check current code and SQL when older documents disagree. Label demo data and distinguish a visible UI from a tested database operation.
+
+![Editable database design example](assets/showcase/software-report/slide_02.png)
+
+These two pages use an independently constructed warehouse scenario, not a user project or measured result. See the [example](skills/codex-ppt-skill/examples/software-report/README.md) and [report workflow](skills/codex-ppt-skill/docs/software-project-report.md). The older three-color previews compare palettes only; real design alternatives must also differ in composition or visual hierarchy.
+
+The optional host integration check is node --test skills/codex-ppt-skill/tests/test_editable_builder.mjs, with RUNTIME_NODE_MODULES and optionally RUNTIME_PYTHON set. It verifies exported connector attachments, direction and native table padding. GitHub CI runs the Python workflow tests; it does not include the proprietary host runtime or judge visual quality.
