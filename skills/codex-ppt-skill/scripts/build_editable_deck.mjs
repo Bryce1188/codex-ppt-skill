@@ -93,7 +93,12 @@ export async function buildDeck(spec, { specDir = '.', moduleRoot } = {}) {
         const mime = { '.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.webp':'image/webp' }[path.extname(filename).toLowerCase()];
         check(mime, `${label}: supported images are PNG, JPEG and WebP`);
         check(!(el.role === 'evidence' && el.fit === 'cover'), `${label}: evidence must use contain to preserve labels`);
-        slide.images.add({ blob: new Uint8Array(await fs.readFile(filename)), contentType: mime, alt: el.alt, fit: el.fit ?? 'contain', position });
+        if (el.crop !== undefined) {
+          check(el.crop && ['left','top','right','bottom'].every(k => Number.isFinite(el.crop[k]) && el.crop[k] >= 0 && el.crop[k] < 1) &&
+            el.crop.left + el.crop.right < 1 && el.crop.top + el.crop.bottom < 1, label + ': crop must leave a nonempty normalized image region');
+          check(el.role !== 'evidence' || (typeof el.cropReason === 'string' && el.cropReason.trim()), label + ': cropped evidence needs cropReason and a preserved context view');
+        }
+        slide.images.add({ blob: new Uint8Array(await fs.readFile(filename)), contentType: mime, alt: el.alt, fit: el.fit ?? 'contain', position, ...(el.crop ? { crop: el.crop } : {}) });
         summary.images++;
       } else throw new Error(`${label}: unsupported type ${el.type}`);
     }

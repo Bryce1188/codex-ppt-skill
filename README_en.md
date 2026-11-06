@@ -20,9 +20,17 @@ The default engineering profile uses the same fill for peer nodes and adds no au
 
 The builder reads this profile. Text and diagram nodes reference style roles; tables, charts and connectors inherit shared defaults. Unexplained changes in headings, colors or diagram styling fail the source check. Deliberate exceptions are recorded. Rendered review is still required.
 
-![The same profile applied to a database diagram](assets/showcase/software-report/slide_02.png)
+![The same profile applied to a database diagram](assets/showcase/software-report/slide_03.png)
 
-Both pages use an independently constructed warehouse scenario and the [technical editorial profile](skills/codex-ppt-skill/references/design-profiles/technical-editorial.json). They are not a real user's project or measured result. This engineering example is not a universal palette for every topic. See [style extraction and reuse](skills/codex-ppt-skill/docs/style-library.md).
+All four examples use an independently constructed warehouse scenario and the [project report profile](skills/codex-ppt-skill/references/design-profiles/project-report.json). They are not a real user's project or measured result. This engineering example is not a universal palette for every topic. See [style extraction and reuse](skills/codex-ppt-skill/docs/style-library.md).
+
+The [runnable layout patterns](skills/codex-ppt-skill/docs/layout-patterns.md) separate architecture, a single operation, core data relationships and design tradeoffs. Functional demonstrations pair a full screenshot with native cropped details and nearby annotations, preserving the original image. Database pages explain selected relationships and design reasons; complete dictionaries belong in an appendix or source files.
+
+![A single inventory operation](assets/showcase/software-report/slide_02.png)
+
+![Design tradeoffs](assets/showcase/software-report/slide_04.png)
+
+Review final renders for readable evidence, nearby explanations, clear connectors and a coherent full-deck sequence. Revise concrete failures instead of treating passing structural checks as proof of visual quality.
 
 ## Generate and revise native PPTX
 

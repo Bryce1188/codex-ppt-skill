@@ -1,24 +1,21 @@
-# 软件项目汇报设计示例
+# 软件项目汇报版式实例
 
-本示例虚构一个仓储方案，用两页演示架构和数据库关系的原生可编辑排版，不代表任何用户项目已实现或测试成功。
+四页独立虚构仓储方案，分别演示总体架构、一次业务流程、核心数据关系和设计取舍。文字、技术节点和附着连接线均为原生对象。示例没有实现代码、实测指标或用户项目资料。
 
-示例设定：浏览器通过 Next.js 服务查询或更新库存，MySQL 保存数据，Socket.IO 推送库存变更通知。数据库核心子集为 warehouses、stocks、stock_moves；stocks 关联商品表 products，仓库与商品组合唯一，库存更新与流水记录处于同一事务。未附实现或性能数据。
+## 示例设定
+
+浏览器通过 Next.js 查询与修改库存，MySQL 保存数据，同一 Node.js 服务中的 Socket.IO 推送变更。一次变更先校验输入与权限，在同一事务中更新库存并写流水，提交后通知客户端刷新。仓库与商品组合唯一，库存关联变更流水。商品表和完整数据字典省略。选择流水方案的依据是追溯需求，没有性能提升数据。
 
 ## 生成与检查
 
-在已提供 artifact-tool 的宿主环境，从 skill 根目录执行：
+在提供 artifact-tool 的宿主环境，从 skill 根目录执行：
 
 ```text
+node scripts/design_profile.mjs --spec examples/software-report/deck.json
 node scripts/build_editable_deck.mjs --spec examples/software-report/deck.json --out work/software-draft.pptx --module-root <host-node_modules> --preview-dir work/software-previews
 node --test tests/test_editable_builder.mjs
 ```
 
-生成后按宿主流程完成最终包检查，导入最终 PPTX 并逐页渲染。仓库 README 的截图来自此示例最终文件的重新导入渲染。文字、节点和附着连接线是独立对象；移动节点后仍需检查独立文字和关系标签的位置。
+生成后完成宿主最终包检查，再导入最终 PPTX 逐页渲染。README 展示图来自最终文件重新导入。示例共用 [项目汇报配置](../../references/design-profiles/project-report.json)，按角色继承字体、标题、底色和节点样式；修改主题时更新共享配置。
 
-功能页必须换成用户项目的真实截图，不能用此示例推导功能完成情况。软件汇报的素材、审计与视觉规则见 [软件项目汇报](../../docs/software-project-report.md)。
-
-## 统一视觉配置
-
-本例 deck.json 引用 ../../references/design-profiles/technical-editorial.json，两页共用该配置的字体、标题位置、背景、技术图示和图注样式。每个文字/节点只指定 styleRole 与内容，不逐页重写颜色和字级。
-
-先运行 node scripts/design_profile.mjs --spec examples/software-report/deck.json。检查只验证源配置的应用和已说明的例外，最终 PPTX 的可读性仍需渲染查看。替换主题时编辑或复制配置并更新版本；此工程白蓝示例不代表所有主题都应采用相同配色。
+构图的选择与失败方式见 [版式实例](../../docs/layout-patterns.md)。这些布局可以调整，不是所有项目的固定四页。功能页应使用用户项目截图，按完整界面与局部放大组织，不能用虚构图推导功能已完成。

@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "id": "project-report",
+  "version": "1.0.0",
+  "name": "项目汇报",
+  "bestFor": [
+    "软件项目工作汇报",
+    "工程答辩",
+    "方法与实验说明"
+  ],
+  "designIntent": "完整界面提供上下文，原生裁切放大关键交互；总体架构、操作流程与数据关系分别呈现。同类节点同色，注释与证据就近对应。",
+  "fontFamily": "Microsoft YaHei",
+  "slideSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "backgrounds": {
+    "content": "#F7F8FC",
+    "cover": "#F7F8FC",
+    "section": "#F7F8FC"
+  },
+  "textStyles": {
+    "sectionLabel": {
+      "fontSize": 18,
+      "color": "#3155D9",
+      "bold": true,
+      "position": {
+        "left": 64,
+        "top": 32,
+        "width": 1152,
+        "height": 28
+      },
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "title": {
+      "fontSize": 44,
+      "color": "#1D2D47",
+      "bold": true,
+      "position": {
+        "left": 64,
+        "top": 76,
+        "width": 1152,
+        "height": 64
+      },
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "lead": {
+      "fontSize": 28,
+      "color": "#1D2D47",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "body": {
+      "fontSize": 24,
+      "color": "#40516B",
+      "bold": false,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "nodeTitle": {
+      "fontSize": 28,
+      "color": "#1D2D47",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "nodeBody": {
+      "fontSize": 22,
+      "color": "#40516B",
+      "bold": false,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "relation": {
+      "fontSize": 20,
+      "color": "#3155D9",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "caption": {
+      "fontSize": 18,
+      "color": "#627089",
+      "bold": false,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "itemTitle": {
+      "fontSize": 30,
+      "color": "#1D2D47",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "sectionIndex": {
+      "fontSize": 42,
+      "color": "#3155D9",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      }
+    },
+    "annotation": {
+      "fontSize": 20,
+      "color": "#3155D9",
+      "bold": true,
+      "insets": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "align": "center"
+    }
+  },
+  "shapeStyles": {
+    "node": {
+      "geometry": "rect",
+      "fill": "#FFFFFF",
+      "lineColor": "#C7D1DF",
+      "lineWidth": 1
+    },
+    "boundary": {
+      "geometry": "rect",
+      "fill": "none",
+      "lineColor": "#A0AEC4",
+      "lineWidth": 1,
+      "lineStyle": "dashed"
+    },
+    "annotationBox": {
+      "geometry": "rect",
+      "fill": "none",
+      "lineColor": "#3155D9",
+      "lineWidth": 2
+    },
+    "annotationNumber": {
+      "geometry": "ellipse",
+      "fill": "#FFFFFF",
+      "lineColor": "#3155D9",
+      "lineWidth": 2
+    }
+  },
+  "connectorStyle": {
+    "color": "#6C82A7",
+    "width": 2,
+    "style": "solid"
+  },
+  "tableStyle": {
+    "fontSize": 22,
+    "headerFill": "#EAF0FF",
+    "bodyFill": "#FFFFFF",
+    "headerColor": "#1D2D47",
+    "bodyColor": "#40516B",
+    "borderColor": "#D8E0ED",
+    "borderWidth": 1,
+    "cellPadding": {
+      "left": 16,
+      "right": 16,
+      "top": 12,
+      "bottom": 12
+    }
+  },
+  "chartStyle": {
+    "labelSize": 22,
+    "color": "#40516B"
+  },
+  "layoutRules": {
+    "margin": 64,
+    "contentTop": 168,
+    "gutter": 32,
+    "captionGap": 18,
+    "titleMaxLines": 1
+  },
+  "layouts": {
+    "feature": "完整界面与对应编号的局部放大配合；保留完整原图，控件和图注在最终尺寸可读。",
+    "architecture": "按真实运行边界分组，连线表达调用或事件，不混入另一套操作步骤。",
+    "dataModel": "正文保留主外键及关键业务字段，解释设计约束，完整字典另附。",
+    "results": "一个主要结果图配必要口径；完整表格和实现细节放附录。",
+    "requestFlow": "一个真实操作串起校验、事务、通知与界面更新，步骤与说明就近对应。"
+  },
+  "imageTreatment": {
+    "evidence": "contain，保留原图、坐标和标签",
+    "background": "默认用主题底色；需要题材插图时固定构图、色温与留白，不逐页搜索新模板"
+  },
+  "forbidden": [
+    "把所有项目都套成蓝色科技风",
+    "同一套内页随意切换深浅底",
+    "通过换背景代替信息设计",
+    "把原生图表转换成整页截图",
+    "没有明确语义就给某个同类节点单独换填充色",
+    "每页固定左下角制作说明、验证说明或模板套话",
+    "用空框和大面积无用途留白代替必要的流程、数据或解释"
+  ],
+  "chartPalette": [
+    "#3155D9",
+    "#8098C9",
+    "#BDCADF",
+    "#64748B"
+  ]
+}

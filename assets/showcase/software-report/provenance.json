@@ -1,0 +1,13 @@
+{
+  "source": "skills/codex-ppt-skill/examples/software-report/deck.json",
+  "scope": "独立虚构仓储方案，不含用户素材或实测结果",
+  "profile": "project-report@1.0.0",
+  "render": "最终PPTX重新导入后渲染",
+  "pptx_sha256": "68a55c00098bc322ef3c032de18a00ff2c721b745a5bfa6b02a6bc0ea14a39f8",
+  "previews": {
+    "slide_01.png": "364ec2e4cbacf203fba54e3a79d2e8e9b9bd41e4b67bfb8d963d11ec3f5101c0",
+    "slide_02.png": "acfd60e3c4b9d5864ee80b4e66b853148de78b4c3484fdb5df470c1b587628f7",
+    "slide_03.png": "62df7d0fe5c3283a6d98c880557127fbc87322249439cffbd0182f334d3d79f3",
+    "slide_04.png": "d331ccb6b2812bb6c4736e1be1eca88a884d5f2b316fcf26749fcbaa1c07c517"
+  }
+}

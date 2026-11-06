@@ -44,9 +44,17 @@
 
 这里的配置会被构建器实际读取：文字和技术节点按角色继承样式，图表、表格与连接线使用共同设置。无说明的标题位移、字号、底色或图示样式变化会被检查。需要局部例外时记录原因；全局修改则更新一份共享配置。
 
-![同一配置生成的数据库页](assets/showcase/software-report/slide_02.png)
+![同一配置生成的数据库页](assets/showcase/software-report/slide_03.png)
 
-两页使用同一个[工程白蓝配置](skills/codex-ppt-skill/references/design-profiles/technical-editorial.json)。布局按内容变化，字体、标题基线和图示规则保持一致。同类节点默认同色，普通内页不添加制作说明页脚；流程页配合具体处理步骤，数据页保留必要字段和约束。这个示例适合工程说明，其他主题应另选或提取适合的视觉身份，不把所有项目都做成同一种科技风。
+四页实例共用一个[项目汇报配置](skills/codex-ppt-skill/references/design-profiles/project-report.json)，分别解释运行边界、一次业务处理、核心数据关系和方案取舍。布局按内容变化，标题、图示和配色规则一致。同类节点同色，普通内页不添加制作说明页脚。
+
+![一次库存变更的流程](assets/showcase/software-report/slide_02.png)
+
+![依据需求说明设计取舍](assets/showcase/software-report/slide_04.png)
+
+[版式实例指南](skills/codex-ppt-skill/docs/layout-patterns.md) 提供可直接修改的页面源。真实项目的功能页采用“完整界面定位 + 关键操作局部放大 + 就近标注”，保留原图和可调整的裁切。技术页将总体架构与业务流程分开，数据库正文保留关键关系和设计理由，完整字段留到附录或源文件。
+
+最终检查加入设计评审：截图是否可读、图文是否对应、连线是否绕行、字段是否经过筛选、整套叙事是否连贯。发现问题要改稿并重新渲染，结构验证通过不能替代这些判断。
 
 现有模板或用户参考优先。背景需要插画时，固定材质、光线、主体位置和留白，把文字与数据留在原生层。风格库保存设计规则，不打包用户私有截图和数据。
 
@@ -93,7 +101,7 @@ node --test skills/codex-ppt-skill/tests/test_design_profile.mjs
 node skills/codex-ppt-skill/scripts/design_profile.mjs --spec skills/codex-ppt-skill/examples/software-report/deck.json
 ```
 
-宿主提供 artifact-tool 和 Python 时，另运行 tests/test_editable_builder.mjs，检查最终 PPTX 的原生连接线、箭头、表格内边距与视觉配置实际导出。GitHub CI 不含宿主专有运行时，不能用它证明视觉质量或 PowerPoint/WPS 兼容性。
+宿主提供 artifact-tool 和 Python 时，另运行 tests/test_editable_builder.mjs，检查最终 PPTX 的原生连接线、箭头、表格内边距、视觉配置，以及裁切比例和原图保留。GitHub CI 不含宿主专有运行时，不能用它证明视觉质量或 PowerPoint/WPS 兼容性。
 
 [课程数据完整示例](skills/codex-ppt-skill/examples/course-report/README.md) 展示任务要求、项目结果和原生图表；[软件示例](skills/codex-ppt-skill/examples/software-report/README.md) 展示共享视觉与技术图示。公开示例均有范围说明。
 

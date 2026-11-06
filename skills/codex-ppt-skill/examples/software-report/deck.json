@@ -1,19 +1,40 @@
 {
-  "designProfile": "../../references/design-profiles/technical-editorial.json",
-  "expectedSlideCount": 2,
+  "designProfile": "../../references/design-profiles/project-report.json",
+  "expectedSlideCount": 4,
   "slides": [
     {
-      "requireEditableText": true,
       "elements": [
         {
           "type": "text",
-          "text": "01 / 虚构仓储示例",
+          "text": "01 / 方案架构",
           "styleRole": "sectionLabel"
         },
         {
           "type": "text",
-          "text": "一次库存变更如何更新并通知用户",
+          "text": "库存服务的运行边界",
           "styleRole": "title"
+        },
+        {
+          "type": "shape",
+          "id": "service",
+          "styleRole": "boundary",
+          "position": {
+            "left": 390,
+            "top": 190,
+            "width": 470,
+            "height": 442
+          }
+        },
+        {
+          "type": "text",
+          "text": "同一 Node.js 服务",
+          "styleRole": "relation",
+          "position": {
+            "left": 420,
+            "top": 204,
+            "width": 410,
+            "height": 36
+          }
         },
         {
           "type": "shape",
@@ -21,9 +42,9 @@
           "styleRole": "node",
           "position": {
             "left": 64,
-            "top": 206,
-            "width": 194,
-            "height": 150
+            "top": 276,
+            "width": 238,
+            "height": 156
           }
         },
         {
@@ -31,32 +52,32 @@
           "text": "浏览器",
           "styleRole": "nodeTitle",
           "position": {
-            "left": 82,
-            "top": 224,
-            "width": 164,
+            "left": 84,
+            "top": 298,
+            "width": 200,
             "height": 40
           }
         },
         {
           "type": "text",
-          "text": "React 页面\n查询库存与录入",
+          "text": "React 页面\n用户操作与界面更新",
           "styleRole": "nodeBody",
           "position": {
-            "left": 82,
-            "top": 278,
-            "width": 164,
-            "height": 66
+            "left": 84,
+            "top": 355,
+            "width": 205,
+            "height": 60
           }
         },
         {
           "type": "shape",
-          "id": "app",
+          "id": "next",
           "styleRole": "node",
           "position": {
-            "left": 336,
-            "top": 206,
-            "width": 246,
-            "height": 150
+            "left": 430,
+            "top": 276,
+            "width": 390,
+            "height": 156
           }
         },
         {
@@ -64,32 +85,32 @@
           "text": "Next.js",
           "styleRole": "nodeTitle",
           "position": {
-            "left": 354,
-            "top": 224,
-            "width": 210,
+            "left": 454,
+            "top": 298,
+            "width": 342,
             "height": 40
           }
         },
         {
           "type": "text",
-          "text": "Server Actions\n认证与业务处理",
+          "text": "页面渲染与 Server Actions\n认证、业务处理与数据访问",
           "styleRole": "nodeBody",
           "position": {
-            "left": 354,
-            "top": 278,
-            "width": 210,
-            "height": 66
+            "left": 454,
+            "top": 355,
+            "width": 342,
+            "height": 60
           }
         },
         {
           "type": "shape",
-          "id": "db",
+          "id": "mysql",
           "styleRole": "node",
           "position": {
-            "left": 660,
-            "top": 206,
-            "width": 194,
-            "height": 150
+            "left": 978,
+            "top": 276,
+            "width": 238,
+            "height": 156
           }
         },
         {
@@ -97,21 +118,43 @@
           "text": "MySQL",
           "styleRole": "nodeTitle",
           "position": {
-            "left": 678,
-            "top": 224,
-            "width": 164,
+            "left": 1000,
+            "top": 298,
+            "width": 194,
             "height": 40
           }
         },
         {
           "type": "text",
-          "text": "库存与变更流水\n用户与登录会话",
+          "text": "仓库、库存与流水\n账户和登录会话",
           "styleRole": "nodeBody",
           "position": {
-            "left": 678,
-            "top": 278,
-            "width": 164,
-            "height": 66
+            "left": 1000,
+            "top": 355,
+            "width": 194,
+            "height": 60
+          }
+        },
+        {
+          "type": "shape",
+          "id": "socket",
+          "styleRole": "node",
+          "position": {
+            "left": 430,
+            "top": 500,
+            "width": 390,
+            "height": 96
+          }
+        },
+        {
+          "type": "text",
+          "text": "Socket.IO  按用户推送事件",
+          "styleRole": "nodeBody",
+          "position": {
+            "left": 454,
+            "top": 532,
+            "width": 342,
+            "height": 42
           }
         },
         {
@@ -119,9 +162,9 @@
           "text": "HTTP",
           "styleRole": "relation",
           "position": {
-            "left": 272,
-            "top": 244,
-            "width": 64,
+            "left": 316,
+            "top": 295,
+            "width": 110,
             "height": 30
           }
         },
@@ -130,32 +173,10 @@
           "text": "SQL",
           "styleRole": "relation",
           "position": {
-            "left": 600,
-            "top": 244,
-            "width": 64,
+            "left": 866,
+            "top": 295,
+            "width": 110,
             "height": 30
-          }
-        },
-        {
-          "type": "shape",
-          "id": "socket",
-          "styleRole": "node",
-          "position": {
-            "left": 336,
-            "top": 449,
-            "width": 246,
-            "height": 94
-          }
-        },
-        {
-          "type": "text",
-          "text": "Socket.IO",
-          "styleRole": "nodeTitle",
-          "position": {
-            "left": 354,
-            "top": 474,
-            "width": 210,
-            "height": 40
           }
         },
         {
@@ -163,127 +184,39 @@
           "text": "业务事件",
           "styleRole": "relation",
           "position": {
-            "left": 470,
-            "top": 390,
-            "width": 130,
+            "left": 652,
+            "top": 454,
+            "width": 144,
             "height": 30
           }
         },
         {
           "type": "text",
-          "text": "消息与通知",
+          "text": "库存变更通知",
           "styleRole": "relation",
           "position": {
-            "left": 88,
-            "top": 418,
-            "width": 220,
+            "left": 208,
+            "top": 506,
+            "width": 210,
             "height": 30
-          }
-        },
-        {
-          "type": "text",
-          "text": "会话与连接",
-          "styleRole": "lead",
-          "position": {
-            "left": 64,
-            "top": 590,
-            "width": 246,
-            "height": 40
-          }
-        },
-        {
-          "type": "text",
-          "text": "读取 Session 并校验有效期，\n按用户标识订阅通知房间。",
-          "styleRole": "nodeBody",
-          "position": {
-            "left": 336,
-            "top": 586,
-            "width": 518,
-            "height": 66
-          }
-        },
-        {
-          "type": "text",
-          "text": "1  校验输入与权限",
-          "styleRole": "lead",
-          "position": {
-            "left": 912,
-            "top": 182,
-            "width": 304,
-            "height": 40
-          }
-        },
-        {
-          "type": "text",
-          "text": "检查仓库、商品与变更数量，\n确认操作用户权限。",
-          "styleRole": "nodeBody",
-          "position": {
-            "left": 912,
-            "top": 232,
-            "width": 304,
-            "height": 66
-          }
-        },
-        {
-          "type": "text",
-          "text": "2  在事务中更新",
-          "styleRole": "lead",
-          "position": {
-            "left": 912,
-            "top": 338,
-            "width": 304,
-            "height": 40
-          }
-        },
-        {
-          "type": "text",
-          "text": "更新库存并写入变更流水，\n记录操作用户和时间。",
-          "styleRole": "nodeBody",
-          "position": {
-            "left": 912,
-            "top": 388,
-            "width": 304,
-            "height": 66
-          }
-        },
-        {
-          "type": "text",
-          "text": "3  通知并刷新库存",
-          "styleRole": "lead",
-          "position": {
-            "left": 912,
-            "top": 494,
-            "width": 304,
-            "height": 40
-          }
-        },
-        {
-          "type": "text",
-          "text": "提交成功后推送变更事件，\n界面重新读取当前库存。",
-          "styleRole": "nodeBody",
-          "position": {
-            "left": 912,
-            "top": 544,
-            "width": 304,
-            "height": 66
           }
         }
       ],
       "connectors": [
         {
           "from": "browser",
-          "to": "app",
+          "to": "next",
           "fromSide": "right",
           "toSide": "left"
         },
         {
-          "from": "app",
-          "to": "db",
+          "from": "next",
+          "to": "mysql",
           "fromSide": "right",
           "toSide": "left"
         },
         {
-          "from": "app",
+          "from": "next",
           "to": "socket",
           "fromSide": "bottom",
           "toSide": "top"
@@ -296,33 +229,248 @@
           "kind": "elbow"
         }
       ],
-      "notes": "独立构造的仓储设计示例，字段、校验、事务与通知均为示例设定，不代表用户项目已实现或实测。显示核心表子集，products、users 等关联表省略。两页共享同一视觉配置，技术节点使用相同填充；未设置固定制作说明页脚。",
+      "notes": "独立虚构仓储方案，仅示范构图与原生对象；没有实现代码、性能测量或用户项目数据。",
       "sources": [
-        "examples/software-report/README.md"
-      ]
+        "README.md#示例设定"
+      ],
+      "requireEditableText": true
     },
     {
-      "requireEditableText": true,
       "elements": [
         {
           "type": "text",
-          "text": "02 / 虚构数据库示例",
+          "text": "02 / 操作流程",
           "styleRole": "sectionLabel"
         },
         {
           "type": "text",
-          "text": "仓库、库存与变更记录的关系",
+          "text": "一次库存变更的处理过程",
           "styleRole": "title"
         },
         {
           "type": "shape",
-          "id": "warehouses",
+          "id": "validate",
           "styleRole": "node",
           "position": {
             "left": 64,
-            "top": 192,
-            "width": 248,
-            "height": 296
+            "top": 222,
+            "width": 228,
+            "height": 142
+          }
+        },
+        {
+          "type": "text",
+          "text": "1  输入与权限",
+          "styleRole": "nodeTitle",
+          "position": {
+            "left": 82,
+            "top": 242,
+            "width": 198,
+            "height": 40
+          }
+        },
+        {
+          "type": "text",
+          "text": "校验商品与数量\n确认操作权限",
+          "styleRole": "nodeBody",
+          "position": {
+            "left": 82,
+            "top": 296,
+            "width": 198,
+            "height": 62
+          }
+        },
+        {
+          "type": "shape",
+          "id": "transaction",
+          "styleRole": "node",
+          "position": {
+            "left": 372,
+            "top": 222,
+            "width": 228,
+            "height": 142
+          }
+        },
+        {
+          "type": "text",
+          "text": "2  事务写入",
+          "styleRole": "nodeTitle",
+          "position": {
+            "left": 390,
+            "top": 242,
+            "width": 198,
+            "height": 40
+          }
+        },
+        {
+          "type": "text",
+          "text": "更新当前库存\n写入变更流水",
+          "styleRole": "nodeBody",
+          "position": {
+            "left": 390,
+            "top": 296,
+            "width": 198,
+            "height": 62
+          }
+        },
+        {
+          "type": "shape",
+          "id": "notify",
+          "styleRole": "node",
+          "position": {
+            "left": 680,
+            "top": 222,
+            "width": 228,
+            "height": 142
+          }
+        },
+        {
+          "type": "text",
+          "text": "3  推送变更",
+          "styleRole": "nodeTitle",
+          "position": {
+            "left": 698,
+            "top": 242,
+            "width": 198,
+            "height": 40
+          }
+        },
+        {
+          "type": "text",
+          "text": "事务提交后\n通知在线用户",
+          "styleRole": "nodeBody",
+          "position": {
+            "left": 698,
+            "top": 296,
+            "width": 198,
+            "height": 62
+          }
+        },
+        {
+          "type": "shape",
+          "id": "refresh",
+          "styleRole": "node",
+          "position": {
+            "left": 988,
+            "top": 222,
+            "width": 228,
+            "height": 142
+          }
+        },
+        {
+          "type": "text",
+          "text": "4  刷新页面",
+          "styleRole": "nodeTitle",
+          "position": {
+            "left": 1006,
+            "top": 242,
+            "width": 198,
+            "height": 40
+          }
+        },
+        {
+          "type": "text",
+          "text": "更新库存视图\n显示最新数量",
+          "styleRole": "nodeBody",
+          "position": {
+            "left": 1006,
+            "top": 296,
+            "width": 198,
+            "height": 62
+          }
+        },
+        {
+          "type": "text",
+          "text": "事务内",
+          "styleRole": "lead",
+          "position": {
+            "left": 64,
+            "top": 442,
+            "width": 210,
+            "height": 44
+          }
+        },
+        {
+          "type": "text",
+          "text": "校验库存变更条件\n更新 stocks.quantity\n插入 stock_moves",
+          "styleRole": "body",
+          "position": {
+            "left": 64,
+            "top": 514,
+            "width": 510,
+            "height": 126
+          }
+        },
+        {
+          "type": "text",
+          "text": "事务外",
+          "styleRole": "lead",
+          "position": {
+            "left": 688,
+            "top": 442,
+            "width": 528,
+            "height": 44
+          }
+        },
+        {
+          "type": "text",
+          "text": "发送库存变更事件\n通知有权限的在线用户\n客户端重新查询库存",
+          "styleRole": "body",
+          "position": {
+            "left": 688,
+            "top": 514,
+            "width": 528,
+            "height": 126
+          }
+        }
+      ],
+      "connectors": [
+        {
+          "from": "validate",
+          "to": "transaction",
+          "fromSide": "right",
+          "toSide": "left"
+        },
+        {
+          "from": "transaction",
+          "to": "notify",
+          "fromSide": "right",
+          "toSide": "left"
+        },
+        {
+          "from": "notify",
+          "to": "refresh",
+          "fromSide": "right",
+          "toSide": "left"
+        }
+      ],
+      "notes": "独立虚构仓储方案，仅示范构图与原生对象；没有实现代码、性能测量或用户项目数据。",
+      "sources": [
+        "README.md#示例设定"
+      ],
+      "requireEditableText": true
+    },
+    {
+      "elements": [
+        {
+          "type": "text",
+          "text": "03 / 核心数据",
+          "styleRole": "sectionLabel"
+        },
+        {
+          "type": "text",
+          "text": "仓库、当前库存与变更流水",
+          "styleRole": "title"
+        },
+        {
+          "type": "shape",
+          "id": "boards",
+          "styleRole": "node",
+          "position": {
+            "left": 64,
+            "top": 216,
+            "width": 254,
+            "height": 254
           }
         },
         {
@@ -330,65 +478,65 @@
           "text": "warehouses",
           "styleRole": "nodeTitle",
           "position": {
-            "left": 84,
-            "top": 210,
-            "width": 216,
+            "left": 86,
+            "top": 238,
+            "width": 212,
             "height": 40
           }
         },
         {
           "type": "text",
-          "text": "PK  id\ncode（唯一）\nname\nlocation\nstatus\ncreated_at\nupdated_at",
+          "text": "PK  id\nname\nlocation",
           "styleRole": "nodeBody",
           "position": {
-            "left": 84,
-            "top": 266,
-            "width": 218,
-            "height": 196
+            "left": 86,
+            "top": 301,
+            "width": 212,
+            "height": 112
           }
         },
         {
           "type": "shape",
-          "id": "stocks",
+          "id": "posts",
           "styleRole": "node",
           "position": {
-            "left": 480,
-            "top": 192,
-            "width": 298,
-            "height": 296
+            "left": 484,
+            "top": 216,
+            "width": 300,
+            "height": 254
           }
         },
         {
           "type": "text",
-          "text": "stocks  库存",
+          "text": "stocks",
           "styleRole": "nodeTitle",
           "position": {
-            "left": 502,
-            "top": 210,
-            "width": 254,
+            "left": 506,
+            "top": 238,
+            "width": 256,
             "height": 40
           }
         },
         {
           "type": "text",
-          "text": "PK  id\nFK  warehouse_id\nFK  product_id\nquantity\nunit\ncreated_at\nupdated_at",
+          "text": "PK  id\nFK  warehouse_id\nFK  product_id\nquantity",
           "styleRole": "nodeBody",
           "position": {
-            "left": 502,
-            "top": 266,
+            "left": 506,
+            "top": 301,
             "width": 266,
-            "height": 196
+            "height": 144
           }
         },
         {
           "type": "shape",
-          "id": "moves",
+          "id": "replies",
           "styleRole": "node",
           "position": {
-            "left": 946,
-            "top": 192,
-            "width": 270,
-            "height": 296
+            "left": 948,
+            "top": 216,
+            "width": 268,
+            "height": 254
           }
         },
         {
@@ -396,21 +544,21 @@
           "text": "stock_moves",
           "styleRole": "nodeTitle",
           "position": {
-            "left": 966,
-            "top": 210,
-            "width": 238,
+            "left": 970,
+            "top": 238,
+            "width": 234,
             "height": 40
           }
         },
         {
           "type": "text",
-          "text": "PK  id\nFK  stock_id\nFK  operator_id\ndelta_qty\nreason\ncreated_at",
+          "text": "PK  id\nFK  stock_id\ndelta\ncreated_at",
           "styleRole": "nodeBody",
           "position": {
-            "left": 966,
-            "top": 266,
-            "width": 238,
-            "height": 196
+            "left": 970,
+            "top": 301,
+            "width": 234,
+            "height": 144
           }
         },
         {
@@ -418,9 +566,9 @@
           "text": "1",
           "styleRole": "relation",
           "position": {
-            "left": 324,
-            "top": 304,
-            "width": 36,
+            "left": 334,
+            "top": 307,
+            "width": 34,
             "height": 30
           }
         },
@@ -429,9 +577,9 @@
           "text": "0..N",
           "styleRole": "relation",
           "position": {
-            "left": 406,
-            "top": 304,
-            "width": 68,
+            "left": 410,
+            "top": 307,
+            "width": 70,
             "height": 30
           }
         },
@@ -440,9 +588,9 @@
           "text": "1",
           "styleRole": "relation",
           "position": {
-            "left": 792,
-            "top": 304,
-            "width": 36,
+            "left": 800,
+            "top": 307,
+            "width": 34,
             "height": 30
           }
         },
@@ -451,109 +599,195 @@
           "text": "0..N",
           "styleRole": "relation",
           "position": {
-            "left": 864,
-            "top": 304,
+            "left": 866,
+            "top": 307,
             "width": 78,
             "height": 30
           }
         },
         {
           "type": "text",
-          "text": "关系与查询约束",
+          "text": "库存与流水在同一事务中更新",
           "styleRole": "lead",
           "position": {
             "left": 64,
-            "top": 532,
-            "width": 250,
-            "height": 40
+            "top": 531,
+            "width": 1152,
+            "height": 44
           }
         },
         {
           "type": "text",
-          "text": "商品关联",
-          "styleRole": "relation",
+          "text": "仓库与商品组合唯一，避免同一位置出现重复库存。\n流水记录每次变化，商品表及完整字段另见数据字典。",
+          "styleRole": "body",
           "position": {
-            "left": 360,
-            "top": 532,
-            "width": 130,
-            "height": 30
-          }
-        },
-        {
-          "type": "text",
-          "text": "stocks.product_id 引用商品表，仓库与商品组合唯一。",
-          "styleRole": "nodeBody",
-          "position": {
-            "left": 514,
-            "top": 530,
-            "width": 702,
-            "height": 36
-          }
-        },
-        {
-          "type": "text",
-          "text": "流水追溯",
-          "styleRole": "relation",
-          "position": {
-            "left": 360,
-            "top": 576,
-            "width": 130,
-            "height": 30
-          }
-        },
-        {
-          "type": "text",
-          "text": "每条变更关联库存、操作用户与创建时间，便于追溯。",
-          "styleRole": "nodeBody",
-          "position": {
-            "left": 514,
-            "top": 574,
-            "width": 702,
-            "height": 36
-          }
-        },
-        {
-          "type": "text",
-          "text": "查询索引",
-          "styleRole": "relation",
-          "position": {
-            "left": 360,
-            "top": 620,
-            "width": 130,
-            "height": 30
-          }
-        },
-        {
-          "type": "text",
-          "text": "库存按仓库与商品定位，流水按库存与创建时间检索。",
-          "styleRole": "nodeBody",
-          "position": {
-            "left": 514,
-            "top": 618,
-            "width": 702,
-            "height": 60
+            "left": 64,
+            "top": 598,
+            "width": 1152,
+            "height": 76
           }
         }
       ],
       "connectors": [
         {
-          "from": "warehouses",
-          "to": "stocks",
+          "from": "boards",
+          "to": "posts",
           "fromSide": "right",
           "toSide": "left",
           "arrow": false
         },
         {
-          "from": "stocks",
-          "to": "moves",
+          "from": "posts",
+          "to": "replies",
           "fromSide": "right",
           "toSide": "left",
           "arrow": false
         }
       ],
-      "notes": "独立构造的仓储设计示例，字段、校验、事务与通知均为示例设定，不代表用户项目已实现或实测。显示核心表子集，products、users 等关联表省略。两页共享同一视觉配置，技术节点使用相同填充；未设置固定制作说明页脚。",
+      "notes": "独立虚构仓储方案，仅示范构图与原生对象；没有实现代码、性能测量或用户项目数据。",
       "sources": [
-        "examples/software-report/README.md"
+        "README.md#示例设定"
+      ],
+      "requireEditableText": true
+    },
+    {
+      "requireEditableText": true,
+      "elements": [
+        {
+          "type": "text",
+          "text": "04 / 设计取舍",
+          "styleRole": "sectionLabel"
+        },
+        {
+          "type": "text",
+          "text": "库存是否需要保留变更流水",
+          "styleRole": "title"
+        },
+        {
+          "type": "text",
+          "text": "直接覆盖数量",
+          "styleRole": "lead",
+          "position": {
+            "left": 64,
+            "top": 206,
+            "width": 510,
+            "height": 48
+          }
+        },
+        {
+          "type": "text",
+          "text": "库存与流水共同记录",
+          "styleRole": "lead",
+          "position": {
+            "left": 688,
+            "top": 206,
+            "width": 528,
+            "height": 48
+          }
+        },
+        {
+          "type": "text",
+          "text": "保存内容",
+          "styleRole": "relation",
+          "position": {
+            "left": 64,
+            "top": 294,
+            "width": 510,
+            "height": 32
+          }
+        },
+        {
+          "type": "text",
+          "text": "只保留当前库存数量",
+          "styleRole": "body",
+          "position": {
+            "left": 64,
+            "top": 342,
+            "width": 510,
+            "height": 66
+          }
+        },
+        {
+          "type": "text",
+          "text": "保存内容",
+          "styleRole": "relation",
+          "position": {
+            "left": 688,
+            "top": 294,
+            "width": 528,
+            "height": 32
+          }
+        },
+        {
+          "type": "text",
+          "text": "当前数量，以及每次变更的数量和时间",
+          "styleRole": "body",
+          "position": {
+            "left": 688,
+            "top": 342,
+            "width": 528,
+            "height": 66
+          }
+        },
+        {
+          "type": "text",
+          "text": "适用与代价",
+          "styleRole": "relation",
+          "position": {
+            "left": 64,
+            "top": 442,
+            "width": 510,
+            "height": 32
+          }
+        },
+        {
+          "type": "text",
+          "text": "实现较少。出现差异时，\n无法仅靠当前值还原变化过程。",
+          "styleRole": "body",
+          "position": {
+            "left": 64,
+            "top": 490,
+            "width": 510,
+            "height": 96
+          }
+        },
+        {
+          "type": "text",
+          "text": "适用与代价",
+          "styleRole": "relation",
+          "position": {
+            "left": 688,
+            "top": 442,
+            "width": 528,
+            "height": 32
+          }
+        },
+        {
+          "type": "text",
+          "text": "支持追溯。需要同一事务更新，\n并处理流水增长与查询需求。",
+          "styleRole": "body",
+          "position": {
+            "left": 688,
+            "top": 490,
+            "width": 528,
+            "height": 96
+          }
+        },
+        {
+          "type": "text",
+          "text": "本示例选择保留流水，依据是库存追溯需求；性能影响需要另行测量。",
+          "styleRole": "body",
+          "position": {
+            "left": 64,
+            "top": 630,
+            "width": 1152,
+            "height": 58
+          }
+        }
+      ],
+      "notes": "方案比较以虚构的追溯需求为依据，没有测得速度、成本或效率提升。",
+      "sources": [
+        "README.md#示例设定"
       ]
     }
   ]

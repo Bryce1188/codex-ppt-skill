@@ -3,10 +3,17 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { buildDeck } from '../scripts/build_editable_deck.mjs';
 
 const options = { moduleRoot: process.env.RUNTIME_NODE_MODULES };
+const cropImage = new URL('../examples/course-report/assets/cover-background.png', import.meta.url);
+const imageSpec = crop => ({fontFamily:'Arial',slides:[{elements:[{
+ type:'image',path:fileURLToPath(cropImage),alt:'Crop test',
+ role:'evidence',fit:'contain',crop,cropReason:'Detail; complete context remains in source image',
+ position:{left:64,top:100,width:600,height:300}
+}]}]});
 const sharedProfile = JSON.parse(await fs.readFile(new URL('../references/design-profiles/technical-editorial.json', import.meta.url), 'utf8'));
 const node = (id, left) => ({ type:'shape', id, position:{left,top:100,width:200,height:100} });
 const fixture = () => ({
@@ -35,6 +42,37 @@ test('rejects an invalid attachment side',async()=>{
 test('rejects self connectors',async()=>{
  const s=fixture();s.slides[0].connectors[0].to='source';
  await assert.rejects(buildDeck(s,options),/self connectors/);
+});
+test('rejects empty or invalid crop regions and missing evidence reasons',async()=>{
+ for (const crop of [{left:0.6,right:0.4,top:0,bottom:0},{left:-0.1,right:0,top:0,bottom:0},{left:0,right:0,top:NaN,bottom:0}]) {
+  await assert.rejects(buildDeck(imageSpec(crop),options),/nonempty normalized image region/);
+ }
+ const s=imageSpec({left:0.1,right:0.2,top:0.1,bottom:0.2});
+ delete s.slides[0].elements[0].cropReason;
+ await assert.rejects(buildDeck(s,options),/cropped evidence needs cropReason/);
+});
+test('exports native image crop while preserving original image bytes',async()=>{
+ const s=imageSpec({left:0.1,right:0.2,top:0.15,bottom:0.25});
+ const {presentation,PresentationFile}=await buildDeck(s,options);
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'ppt-crop-test-'));
+ const output=path.join(dir,'crop.pptx');
+ await (await PresentationFile.exportPptx(presentation)).save(output);
+ const check=`import sys,zipfile,hashlib,xml.etree.ElementTree as E
+ns={'p':'http://schemas.openxmlformats.org/presentationml/2006/main','a':'http://schemas.openxmlformats.org/drawingml/2006/main'}
+with zipfile.ZipFile(sys.argv[1]) as z:
+ r=E.fromstring(z.read('ppt/slides/slide1.xml'))
+ pic=r.find('.//p:pic',ns)
+ assert pic is not None, 'Native picture missing'
+ crop=pic.find('.//a:srcRect',ns)
+ assert crop is not None
+ for key,value in {'l':10000,'r':20000,'t':15000,'b':25000}.items():
+  assert abs(int(crop.get(key,'0'))-value)<=1, (key,crop.attrib)
+ original=hashlib.sha256(open(sys.argv[2],'rb').read()).digest()
+ assert any(hashlib.sha256(z.read(n)).digest()==original for n in z.namelist() if n.startswith('ppt/media/')), 'Original bytes changed'
+ print('Native crop and preserved original verified')
+`;
+ const result=execFileSync(process.env.RUNTIME_PYTHON??'python',['-c',check,output,s.slides[0].elements[0].path],{encoding:'utf8'});
+ assert.match(result,/verified/);
 });
 test('exports attached directional connectors and styled native tables',async()=>{
  const s=fixture();
